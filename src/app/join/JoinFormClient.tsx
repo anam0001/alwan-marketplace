@@ -312,11 +312,11 @@ export default function JoinFormClient() {
               {/* ─── Disclaimer ─── */}
               <p className="text-xs text-neutral-400 text-center">
                 By submitting, you agree to our{" "}
-                <a href="#" className="text-primary hover:underline">
+                <a href="/under-development" className="text-primary hover:underline">
                   Terms of Service
                 </a>{" "}
                 and{" "}
-                <a href="#" className="text-primary hover:underline">
+                <a href="/under-development" className="text-primary hover:underline">
                   Privacy Policy
                 </a>
                 .

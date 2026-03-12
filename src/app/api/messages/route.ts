@@ -6,6 +6,7 @@
 
 import { NextResponse } from "next/server";
 import { createMessage, getLatestMessages } from "@/lib/db";
+import { getSupabaseServerClient } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -36,14 +37,50 @@ export async function POST(request: Request) {
       );
     }
 
+    const record = {
+      creator_id: payload.creatorId,
+      creator_name: String(payload.creatorName).trim(),
+      sender_name: String(payload.senderName).trim(),
+      sender_email: String(payload.senderEmail).trim(),
+      sender_phone: String(payload.senderPhone ?? "").trim(),
+      sender_city: String(payload.senderCity ?? "").trim(),
+      message: String(payload.message).trim(),
+    };
+
+    const supabase = getSupabaseServerClient();
+
+    if (supabase) {
+      const { data, error } = await supabase
+        .from("creator_messages")
+        .insert(record)
+        .select("id")
+        .single();
+
+      if (error) {
+        return NextResponse.json(
+          { ok: false, error: "Database insert failed." },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json(
+        {
+          ok: true,
+          messageId: data?.id,
+          message: "Your message has been saved successfully.",
+        },
+        { status: 201 }
+      );
+    }
+
     const inserted = createMessage({
       creatorId: payload.creatorId,
-      creatorName: String(payload.creatorName).trim(),
-      senderName: String(payload.senderName).trim(),
-      senderEmail: String(payload.senderEmail).trim(),
-      senderPhone: String(payload.senderPhone ?? "").trim(),
-      senderCity: String(payload.senderCity ?? "").trim(),
-      message: String(payload.message).trim(),
+      creatorName: record.creator_name,
+      senderName: record.sender_name,
+      senderEmail: record.sender_email,
+      senderPhone: record.sender_phone,
+      senderCity: record.sender_city,
+      message: record.message,
     });
 
     return NextResponse.json(
@@ -51,6 +88,7 @@ export async function POST(request: Request) {
         ok: true,
         messageId: inserted.id,
         message: "Your message has been saved successfully.",
+        note: "Stored locally because Supabase is not configured.",
       },
       { status: 201 }
     );
@@ -72,6 +110,27 @@ export async function GET(request: Request) {
     const limit = Number.isFinite(limitParam)
       ? Math.min(Math.max(limitParam, 1), 100)
       : 20;
+
+    const supabase = getSupabaseServerClient();
+
+    if (supabase) {
+      const { data, error } = await supabase
+        .from("creator_messages")
+        .select(
+          "id, creator_id, creator_name, sender_name, sender_email, sender_phone, sender_city, message, created_at"
+        )
+        .order("id", { ascending: false })
+        .limit(limit);
+
+      if (error) {
+        return NextResponse.json(
+          { ok: false, error: "Could not fetch messages." },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json({ ok: true, count: data?.length ?? 0, messages: data ?? [] });
+    }
 
     const rows = getLatestMessages(limit);
     return NextResponse.json({ ok: true, count: rows.length, messages: rows });

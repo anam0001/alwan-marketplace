@@ -38,10 +38,10 @@ const footerSections = [
 
 /* ─── Social Links (add your URLs) ─── */
 const socialLinks = [
-  { label: "Facebook", href: "#", icon: "📘" },
-  { label: "Instagram", href: "#", icon: "📸" },
-  { label: "Twitter", href: "#", icon: "🐦" },
-  { label: "LinkedIn", href: "#", icon: "💼" },
+  { label: "Facebook", href: "/under-development", icon: "📘" },
+  { label: "Instagram", href: "/under-development", icon: "📸" },
+  { label: "Twitter", href: "/under-development", icon: "🐦" },
+  { label: "LinkedIn", href: "/under-development", icon: "💼" },
 ];
 
 export default function Footer() {
