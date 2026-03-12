@@ -19,19 +19,19 @@ const footerSections = [
   {
     title: "Company",
     links: [
-      { label: "About Alwan", href: "#" },
-      { label: "Our Mission", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "Careers", href: "#" },
+      { label: "About Alwan", href: "/under-development" },
+      { label: "Our Mission", href: "/under-development" },
+      { label: "Blog", href: "/under-development" },
+      { label: "Careers", href: "/under-development" },
     ],
   },
   {
     title: "Support",
     links: [
-      { label: "Help Center", href: "#" },
-      { label: "Contact Us", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
+      { label: "Help Center", href: "/under-development" },
+      { label: "Contact Us", href: "/under-development" },
+      { label: "Privacy Policy", href: "/under-development" },
+      { label: "Terms of Service", href: "/under-development" },
     ],
   },
 ];

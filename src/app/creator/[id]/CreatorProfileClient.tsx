@@ -9,10 +9,10 @@ import { creatorReviews, marketplaceItems } from "@/lib/data";
 import { getInitials, formatPrice } from "@/lib/utils";
 import Badge from "@/components/ui/Badge";
 import RatingStars from "@/components/ui/RatingStars";
-import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import FadeInOnScroll from "@/components/animations/FadeInOnScroll";
 import SectionHeading from "@/components/ui/SectionHeading";
+import CreatorMessageForm from "@/components/forms/CreatorMessageForm";
 
 interface Creator {
   id: number;
@@ -101,11 +101,7 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
               </div>
 
               {/* Contact button */}
-              <div className="mt-6">
-                <Button variant="primary" size="md">
-                  📩 Contact {creator.name.split(" ")[0]}
-                </Button>
-              </div>
+              <CreatorMessageForm creatorId={creator.id} creatorName={creator.name} />
             </motion.div>
           </div>
         </div>
