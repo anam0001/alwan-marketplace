@@ -1,6 +1,6 @@
 /* ──────────────────────────────────────────────
  *  API Route: /api/messages
- *  - POST: store a new message in SQLite
+ *  - POST: store a new message in database
  *  - GET : fetch latest messages (for admin/testing)
  * ────────────────────────────────────────────── */
 
