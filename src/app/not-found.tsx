@@ -1,30 +1,25 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
-import Button from "@/components/ui/Button";
-import FloatingShapes from "@/components/animations/FloatingShapes";
 
 export default function NotFound() {
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-secondary/20">
-      <FloatingShapes variant="light" />
+      {/* Decorative animated background (server-rendered) */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-primary/10 blur-3xl animate-float-slow" />
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-secondary/60 blur-3xl animate-float-reverse" />
+        <div className="absolute top-20 left-1/4 w-3 h-3 rounded-full bg-primary/30 animate-pulse-soft" />
+        <div className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-accent-gold/40 animate-pulse-soft animation-delay-1000" />
+        <div className="absolute bottom-1/4 left-1/3 w-2 h-2 rounded-full bg-primary/25 animate-pulse-soft animation-delay-2000" />
+      </div>
 
       <div className="container-custom relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto text-center rounded-3xl bg-white/80 backdrop-blur-md border border-primary/10 shadow-card p-8 md:p-12"
-        >
-          <motion.div
-            animate={{ y: [0, -8, 0], rotate: [0, 2, -2, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
+        <div className="max-w-2xl mx-auto text-center rounded-3xl bg-white/85 backdrop-blur-md border border-primary/10 shadow-card p-8 md:p-12">
+          <div
             className="text-6xl md:text-7xl"
             aria-hidden="true"
           >
-            🚧
-          </motion.div>
+            <span className="inline-block animate-float">🚧</span>
+          </div>
 
           <h1 className="mt-4 text-4xl md:text-6xl font-extrabold text-gradient-primary">
             404
@@ -42,12 +37,18 @@ export default function NotFound() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Button href="/" variant="primary">
+            <Link
+              href="/"
+              className="px-6 py-3 rounded-2xl bg-gradient-primary text-white font-semibold shadow-soft hover:scale-[1.02] transition-transform"
+            >
               Back to Home
-            </Button>
-            <Button href="/explore" variant="outline">
+            </Link>
+            <Link
+              href="/explore"
+              className="px-6 py-3 rounded-2xl border border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-colors"
+            >
               Explore Marketplace
-            </Button>
+            </Link>
           </div>
 
           <div className="mt-6 text-xs text-neutral-400">
@@ -60,7 +61,7 @@ export default function NotFound() {
               /creator/2
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
