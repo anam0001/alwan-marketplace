@@ -32,6 +32,10 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
   const creatorServices = marketplaceItems.filter(
     (item) => item.creatorId === creator.id
   );
+  const creatorStartingPrice =
+    creatorServices.length > 0
+      ? Math.min(...creatorServices.map((item) => item.price))
+      : null;
 
   return (
     <div className="min-h-screen bg-neutral-50 pt-24">
@@ -90,6 +94,14 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
               <p className="mt-4 text-neutral-600 max-w-xl leading-relaxed">
                 {creator.bio}
               </p>
+
+              {creatorStartingPrice !== null && (
+                <p className="mt-3 text-sm font-semibold text-neutral-700">
+                  Gig pricing starts from{" "}
+                  <span className="text-primary">{formatPrice(creatorStartingPrice)}</span>
+                  <span className="text-neutral-500 font-normal"> • Open any gig to see Basic / Standard / Premium packages.</span>
+                </p>
+              )}
 
               {/* Skills tags */}
               <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-4">

@@ -10,6 +10,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppFloatingButton from "@/components/ui/WhatsAppFloatingButton";
 
 /* ─── Google Font Setup (change font here) ─── */
 const poppins = Poppins({
@@ -65,6 +66,9 @@ export default function RootLayout({
 
         {/* ─── Footer ─── */}
         <Footer />
+
+        {/* ─── Floating WhatsApp Contact ─── */}
+        <WhatsAppFloatingButton />
       </body>
     </html>
   );

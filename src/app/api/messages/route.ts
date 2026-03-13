@@ -58,7 +58,12 @@ export async function POST(request: Request) {
 
       if (error) {
         return NextResponse.json(
-          { ok: false, error: "Database insert failed." },
+          {
+            ok: false,
+            error:
+              error.message ||
+              "Database insert failed. Please contact us on WhatsApp for urgent requests.",
+          },
           { status: 500 }
         );
       }
@@ -93,10 +98,11 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown server error";
     return NextResponse.json(
       {
         ok: false,
-        error: "Something went wrong while saving your message.",
+        error: `Something went wrong while saving your message. ${message}`,
       },
       { status: 500 }
     );

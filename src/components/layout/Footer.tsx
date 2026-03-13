@@ -11,9 +11,10 @@ const footerSections = [
     title: "Platform",
     links: [
       { label: "Explore Marketplace", href: "/explore" },
+      { label: "Explore Talent", href: "/explore-talent" },
+      { label: "Gigs", href: "/gigs" },
       { label: "Join as Creator", href: "/join" },
-      { label: "How It Works", href: "/#how-it-works" },
-      { label: "Categories", href: "/#categories" },
+      { label: "Creators Gigs", href: "/gigs/creators" },
     ],
   },
   {
@@ -29,7 +30,7 @@ const footerSections = [
     title: "Support",
     links: [
       { label: "Help Center", href: "/under-development" },
-      { label: "Contact Us", href: "/under-development" },
+      { label: "Contact Us", href: "https://wa.me/923133457485" },
       { label: "Privacy Policy", href: "/under-development" },
       { label: "Terms of Service", href: "/under-development" },
     ],
@@ -40,7 +41,7 @@ const footerSections = [
 const socialLinks = [
   { label: "Facebook", href: "/under-development", icon: "📘" },
   { label: "Instagram", href: "/under-development", icon: "📸" },
-  { label: "Twitter", href: "/under-development", icon: "🐦" },
+  { label: "WhatsApp", href: "https://wa.me/923133457485", icon: "💬" },
   { label: "LinkedIn", href: "/under-development", icon: "💼" },
 ];
 

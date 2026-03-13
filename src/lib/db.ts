@@ -19,7 +19,10 @@ export interface NewMessage {
   message: string;
 }
 
-const dataDir = path.join(process.cwd(), "data");
+const dataDir =
+  process.env.NODE_ENV === "production"
+    ? path.join("/tmp", "alwan-data")
+    : path.join(process.cwd(), "data");
 const dbPath = path.join(dataDir, "messages.json");
 
 if (!fs.existsSync(dataDir)) {

@@ -78,8 +78,12 @@ export default function CreatorMessageForm({
       setForm(initialState);
       setTimeout(() => setIsOpen(false), 1600);
     } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Could not send message right now. Please try again.";
       setStatus("error");
-      setStatusText("Could not send message right now. Please try again.");
+      setStatusText(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -174,13 +178,23 @@ export default function CreatorMessageForm({
             </div>
 
             {status !== "idle" && (
-              <p
+              <div
                 className={`text-sm font-medium ${
                   status === "success" ? "text-emerald-600" : "text-rose-600"
                 }`}
               >
-                {statusText}
-              </p>
+                <p>{statusText}</p>
+                {status === "error" && (
+                  <a
+                    href="https://wa.me/923133457485"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-2 underline"
+                  >
+                    Or contact us directly on WhatsApp
+                  </a>
+                )}
+              </div>
             )}
           </motion.form>
         )}

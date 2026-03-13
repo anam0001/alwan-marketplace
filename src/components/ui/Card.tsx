@@ -90,10 +90,10 @@ export default function Card({
 
         {/* View button */}
         <Link
-          href={`/creator/${creatorId}`}
+          href={`/gig/${id}`}
           className="mt-4 block w-full text-center py-2.5 rounded-xl bg-primary/5 text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-300"
         >
-          View Details
+          View Gig & Pricing
         </Link>
       </div>
     </motion.article>
