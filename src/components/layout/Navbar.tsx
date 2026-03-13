@@ -37,27 +37,39 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "bg-white/90 backdrop-blur-lg shadow-soft py-3"
-          : "bg-transparent py-5"
+          ? "py-3"
+          : "py-4"
       )}
     >
-      <nav className="container-custom flex items-center justify-between" aria-label="Main navigation">
+      <nav
+        className={cn(
+          "container-custom flex items-center justify-between rounded-2xl border px-4 sm:px-5 transition-all duration-500",
+          isScrolled
+            ? "bg-white/85 backdrop-blur-xl border-primary/10 shadow-card py-3"
+            : "bg-white/70 backdrop-blur-md border-white/50 shadow-soft py-3"
+        )}
+        aria-label="Main navigation"
+      >
         {/* ─── Logo ─── */}
         <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-2xl md:text-3xl font-bold text-gradient-primary">
+          <span className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-primary text-white text-sm font-bold shadow-soft">
+            A
+          </span>
+          <span className="text-xl md:text-2xl font-extrabold text-gradient-primary">
             Alwan
           </span>
-          {/* Optional: Add a small decorative element */}
-          <span className="hidden sm:inline-block w-2 h-2 rounded-full bg-gradient-gold group-hover:scale-125 transition-transform" />
+          <span className="hidden sm:inline-flex items-center px-2 py-1 rounded-full text-[10px] font-semibold bg-secondary text-primary">
+            Marketplace
+          </span>
         </Link>
 
         {/* ─── Desktop Links ─── */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-6 lg:gap-8">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm font-medium text-neutral-600 hover:text-primary transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+                className="text-sm font-semibold text-neutral-700 hover:text-primary transition-colors relative after:absolute after:bottom-[-5px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </Link>
@@ -66,7 +78,7 @@ export default function Navbar() {
         </ul>
 
         {/* ─── Desktop CTA ─── */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-2 lg:gap-3">
           <Button variant="ghost" size="sm" href="/explore">
             Explore
           </Button>
@@ -78,7 +90,7 @@ export default function Navbar() {
         {/* ─── Mobile Menu Toggle ─── */}
         <button
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-primary/5 transition-colors"
           aria-label={isMobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileOpen}
         >
@@ -105,7 +117,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white/95 backdrop-blur-lg border-t border-neutral-100"
+            className="md:hidden bg-white/95 backdrop-blur-lg border-t border-neutral-100 mt-2 rounded-b-2xl"
           >
             <div className="container-custom py-6 flex flex-col gap-4">
               {navLinks.map((link) => (

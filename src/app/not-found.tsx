@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-secondary/20">
+    <section className="relative min-h-[85vh] pt-24 md:pt-28 flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-secondary/20">
       {/* Decorative animated background (server-rendered) */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-primary/10 blur-3xl animate-float-slow" />

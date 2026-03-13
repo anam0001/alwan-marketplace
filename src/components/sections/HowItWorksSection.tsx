@@ -38,12 +38,12 @@ export default function HowItWorksSection() {
             <StaggerItem key={step.step}>
               <motion.div
                 whileHover={{ y: -10, rotateX: 2, rotateY: -2 }}
-                className="relative overflow-hidden text-center p-8 rounded-3xl bg-white shadow-card hover:shadow-card-hover transition-all duration-500 border border-transparent hover:border-primary/10"
+                className="relative overflow-visible text-center p-8 rounded-3xl bg-white shadow-card hover:shadow-card-hover transition-all duration-500 border border-transparent hover:border-primary/10"
               >
                 {/* Large faded background number (journey style) */}
                 <span
                   aria-hidden="true"
-                  className="absolute -right-3 -top-9 text-[8rem] leading-none font-extrabold text-primary/[0.06] select-none"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[7.5rem] md:text-[8.5rem] leading-none font-extrabold text-primary/[0.06] select-none pointer-events-none"
                 >
                   {step.step}
                 </span>
@@ -57,15 +57,15 @@ export default function HowItWorksSection() {
                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border border-primary/30 animate-ping" />
 
                 {/* Icon */}
-                <div className="text-5xl mb-4 mt-4 animate-float-slow">{step.icon}</div>
+                <div className="relative z-10 text-5xl mb-4 mt-4 animate-float-slow">{step.icon}</div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-neutral-900 mb-3">
+                <h3 className="relative z-10 text-xl font-bold text-neutral-900 mb-3">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-neutral-500 text-sm leading-relaxed">
+                <p className="relative z-10 text-neutral-500 text-sm leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>
