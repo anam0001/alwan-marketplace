@@ -17,6 +17,17 @@ export const metadata: Metadata = {
     "Browse handmade crafts, embroidery, mehndi designs, fashion, tutoring and more from talented women across Pakistan.",
 };
 
-export default function ExplorePage() {
-  return <ExploreClient />;
+export default async function ExplorePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; category?: string }>;
+}) {
+  const params = await searchParams;
+
+  return (
+    <ExploreClient
+      initialSearch={params?.q ?? ""}
+      initialCategory={params?.category ?? "All"}
+    />
+  );
 }

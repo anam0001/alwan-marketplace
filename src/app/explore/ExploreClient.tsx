@@ -21,9 +21,15 @@ const priceRanges = [
   { label: "Above Rs. 20,000", min: 20000, max: Infinity },
 ];
 
-export default function ExploreClient() {
-  const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+export default function ExploreClient({
+  initialSearch = "",
+  initialCategory = "All",
+}: {
+  initialSearch?: string;
+  initialCategory?: string;
+}) {
+  const [search, setSearch] = useState(initialSearch);
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedPriceRange, setSelectedPriceRange] = useState(0);
 
   /* ─── Filtered items ─── */

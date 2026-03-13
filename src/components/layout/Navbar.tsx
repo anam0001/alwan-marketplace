@@ -7,6 +7,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
@@ -52,8 +53,14 @@ export default function Navbar() {
       >
         {/* ─── Logo ─── */}
         <Link href="/" className="flex items-center gap-2 group">
-          <span className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-primary text-white text-sm font-bold shadow-soft">
-            A
+          <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white shadow-soft p-1 border border-primary/10">
+            <Image
+              src="/alwan-logo.svg"
+              alt="Alwan logo"
+              width={28}
+              height={28}
+              priority
+            />
           </span>
           <span className="text-xl md:text-2xl font-extrabold text-gradient-primary">
             Alwan
