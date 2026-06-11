@@ -9,7 +9,13 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "gold";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "gold"
+  | "brand";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -35,6 +41,8 @@ const variantStyles: Record<ButtonVariant, string> = {
     "text-primary hover:bg-primary/5 active:scale-[0.98]",
   gold:
     "bg-gradient-gold text-white hover:shadow-lg active:scale-[0.98]",
+  brand:
+    "bg-[#C71585] text-white hover:bg-[#b01273] hover:shadow-lg active:scale-[0.98]",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

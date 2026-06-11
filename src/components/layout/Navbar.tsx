@@ -1,6 +1,7 @@
 /* ──────────────────────────────────────────────
  *  Navbar – Sticky + animated on scroll
- *  Links: Home, Explore, Join as Creator
+ *  Links: Home, Explore Talent, Categories, Become a Creator, About Alwan, Contact
+ *  Right-side buttons: Sign In, Join Alwan
  *  Mobile hamburger menu included.
  * ────────────────────────────────────────────── */
 "use client";
@@ -15,10 +16,11 @@ import Button from "@/components/ui/Button";
 /* ─── Navigation Links (edit here) ─── */
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Explore", href: "/explore" },
   { label: "Explore Talent", href: "/explore-talent" },
-  { label: "Gigs", href: "/gigs" },
-  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Categories", href: "/categories" },
+  { label: "Become a Creator", href: "/join" },
+  { label: "About Alwan", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -88,11 +90,11 @@ export default function Navbar() {
 
         {/* ─── Desktop CTA ─── */}
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
-          <Button variant="ghost" size="sm" href="/explore">
-            Explore
+          <Button variant="ghost" size="sm" href="/sign-in">
+            Sign In
           </Button>
-          <Button variant="primary" size="sm" href="/join">
-            Join as Creator
+          <Button variant="brand" size="sm" href="/join">
+            Join Alwan
           </Button>
         </div>
 
@@ -140,11 +142,11 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="flex flex-col gap-3 pt-4 border-t border-neutral-100">
-                <Button variant="outline" size="md" href="/explore" fullWidth>
-                  Explore Talent
+                <Button variant="ghost" size="md" href="/sign-in" fullWidth>
+                  Sign In
                 </Button>
-                <Button variant="primary" size="md" href="/join" fullWidth>
-                  Join as Creator
+                <Button variant="brand" size="md" href="/join" fullWidth>
+                  Join Alwan
                 </Button>
               </div>
             </div>
