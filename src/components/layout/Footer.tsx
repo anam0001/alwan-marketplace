@@ -2,24 +2,7 @@ import Link from "next/link";
 
 const footerSections = [
   {
-    title: "Explore",
-    links: [
-      { label: "Home", href: "/" },
-      { label: "Explore Talent", href: "/explore-talent" },
-      { label: "Categories", href: "/categories" },
-      { label: "Become a Creator", href: "/join" },
-      { label: "Sign In", href: "/sign-in" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Alwan", href: "/about" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-  {
-    title: "Footer Pages",
+    title: "Pages",
     links: [
       { label: "Terms & Conditions", href: "/terms-and-conditions" },
       { label: "Privacy Policy", href: "/privacy-policy" },
@@ -41,10 +24,10 @@ const footerSections = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "/under-development" },
-  { label: "Instagram", href: "/under-development" },
-  { label: "WhatsApp", href: "https://wa.me/923133457485" },
-  { label: "LinkedIn", href: "/under-development" },
+  { label: "Facebook", href: "/under-development", className: "bg-[#1877F2] text-white hover:bg-[#1668d6]" },
+  { label: "Instagram", href: "/under-development", className: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white hover:brightness-105" },
+  { label: "WhatsApp", href: "https://wa.me/923133457485", className: "bg-[#25D366] text-white hover:bg-[#1fb857]" },
+  { label: "LinkedIn", href: "/under-development", className: "bg-[#0A66C2] text-white hover:bg-[#0959a8]" },
 ];
 
 export default function Footer() {
@@ -52,7 +35,7 @@ export default function Footer() {
     <footer className="bg-neutral-950 text-neutral-300" role="contentinfo">
       <div className="container-custom section-padding">
         <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 md:p-8 lg:p-10 backdrop-blur-sm">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_1.7fr]">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.25fr_1.75fr]">
             <div>
               <Link href="/" className="inline-flex items-center gap-3">
                 <span className="text-3xl font-extrabold text-gradient-primary">
@@ -91,16 +74,15 @@ export default function Footer() {
                     href={social.href}
                     target={social.href.startsWith("http") ? "_blank" : undefined}
                     rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="group inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-neutral-300 transition hover:border-primary/30 hover:bg-primary/10 hover:text-white"
+                    className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition transform hover:-translate-y-0.5 hover:shadow-lg ${social.className}`}
                   >
                     {social.label}
-                    <span className="ml-2 transition-transform group-hover:translate-x-0.5">→</span>
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               {footerSections.map((section) => (
                 <div
                   key={section.title}
@@ -117,18 +99,16 @@ export default function Footer() {
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex items-center justify-between rounded-2xl px-3 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
+                            className="block rounded-2xl px-3 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
                           >
-                            <span>{link.label}</span>
-                            <span className="text-primary opacity-0 transition group-hover:opacity-100">→</span>
+                            {link.label}
                           </a>
                         ) : (
                           <Link
                             href={link.href}
-                            className="group flex items-center justify-between rounded-2xl px-3 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
+                            className="block rounded-2xl px-3 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
                           >
-                            <span>{link.label}</span>
-                            <span className="text-primary opacity-0 transition group-hover:opacity-100">→</span>
+                            {link.label}
                           </Link>
                         )}
                       </li>
