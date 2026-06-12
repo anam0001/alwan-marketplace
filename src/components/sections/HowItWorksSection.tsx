@@ -26,13 +26,13 @@ export default function HowItWorksSection() {
         <FadeInOnScroll>
           <SectionHeading
             title="How It Works"
-            subtitle="Start your journey in three simple steps"
+            subtitle="Start your journey in four simple steps"
           />
         </FadeInOnScroll>
 
-        <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-10 relative">
           {/* Connecting line (desktop only) */}
-          <div className="hidden md:block absolute top-24 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-primary/20 via-accent-gold/40 to-primary/20" />
+          <div className="hidden xl:block absolute top-24 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary/20 via-accent-gold/40 to-primary/20" />
 
           {howItWorksSteps.map((step) => (
             <StaggerItem key={step.step}>

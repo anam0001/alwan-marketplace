@@ -1,8 +1,3 @@
-/* ──────────────────────────────────────────────
- *  Footer – Professional, informative footer
- *  Links now mirror the requested Alwan site pages.
- * ────────────────────────────────────────────── */
-
 import Link from "next/link";
 
 const footerSections = [
@@ -46,93 +41,110 @@ const footerSections = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "/under-development", icon: "📘" },
-  { label: "Instagram", href: "/under-development", icon: "📸" },
-  { label: "WhatsApp", href: "https://wa.me/923133457485", icon: "💬" },
-  { label: "LinkedIn", href: "/under-development", icon: "💼" },
+  { label: "Facebook", href: "/under-development" },
+  { label: "Instagram", href: "/under-development" },
+  { label: "WhatsApp", href: "https://wa.me/923133457485" },
+  { label: "LinkedIn", href: "/under-development" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-neutral-900 text-neutral-300" role="contentinfo">
-      {/* ─── Main Footer ─── */}
+    <footer className="bg-neutral-950 text-neutral-300" role="contentinfo">
       <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
-          {/* ─── Brand Column ─── */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-3xl font-bold text-gradient-primary">
-                Alwan
-              </span>
-            </Link>
-            <p className="text-neutral-400 text-sm leading-relaxed max-w-sm mb-6">
-              Empowering women across Pakistan to showcase their handmade
-              talents and earn independently. Where her talent gets the credit
-              it deserves.
-            </p>
-            <p className="text-neutral-500 text-xs leading-relaxed max-w-sm mb-6">
-              Edit the links below to match your final footer pages, campaign
-              content, and future launches without touching the rest of the
-              layout.
-            </p>
-            {/* Social links */}
-            <div className="flex items-center gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-neutral-800 flex items-center justify-center text-lg hover:bg-primary/20 hover:text-primary transition-colors"
+        <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 md:p-8 lg:p-10 backdrop-blur-sm">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_1.7fr]">
+            <div>
+              <Link href="/" className="inline-flex items-center gap-3">
+                <span className="text-3xl font-extrabold text-gradient-primary">
+                  Alwan
+                </span>
+                <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  Marketplace
+                </span>
+              </Link>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-neutral-400">
+                A premium marketplace for women creators to present their work, connect with customers, and grow with confidence.
+              </p>
+              <p className="mt-4 max-w-md text-sm font-semibold text-white">
+                Her Hands. Her Hustle. Her Future.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="/join"
+                  className="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-dark"
                 >
-                  {social.icon}
-                </a>
+                  Become a Creator
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-neutral-200 transition hover:border-primary/30 hover:text-white"
+                >
+                  Contact Support
+                </Link>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target={social.href.startsWith("http") ? "_blank" : undefined}
+                    rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="group inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-neutral-300 transition hover:border-primary/30 hover:bg-primary/10 hover:text-white"
+                  >
+                    {social.label}
+                    <span className="ml-2 transition-transform group-hover:translate-x-0.5">→</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {footerSections.map((section) => (
+                <div
+                  key={section.title}
+                  className="rounded-3xl border border-white/10 bg-white/[0.04] p-5 transition duration-300 hover:-translate-y-1 hover:border-primary/20 hover:bg-white/[0.06]"
+                >
+                  <h4 className="text-xs uppercase tracking-[0.25em] text-primary font-semibold">
+                    {section.title}
+                  </h4>
+                  <ul className="mt-4 space-y-2.5">
+                    {section.links.map((link) => (
+                      <li key={link.label}>
+                        {link.href.startsWith("http") ? (
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center justify-between rounded-2xl px-3 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
+                          >
+                            <span>{link.label}</span>
+                            <span className="text-primary opacity-0 transition group-hover:opacity-100">→</span>
+                          </a>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className="group flex items-center justify-between rounded-2xl px-3 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
+                          >
+                            <span>{link.label}</span>
+                            <span className="text-primary opacity-0 transition group-hover:opacity-100">→</span>
+                          </Link>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
-
-          {/* ─── Link Columns ─── */}
-          {footerSections.map((section) => (
-            <div key={section.title}>
-              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
-                {section.title}
-              </h4>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    {link.href.startsWith("http") ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-neutral-400 hover:text-primary transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        className="text-sm text-neutral-400 hover:text-primary transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
       </div>
 
-      {/* ─── Bottom Bar ─── */}
-      <div className="border-t border-neutral-800">
-        <div className="container-custom py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-neutral-500">
-            © {new Date().getFullYear()} Alwan. All rights reserved.
-          </p>
-          <p className="text-sm text-neutral-500">
-            Made with 💜 for the women of Pakistan
-          </p>
+      <div className="border-t border-white/10">
+        <div className="container-custom py-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-sm text-neutral-500">
+          <p>© {new Date().getFullYear()} Alwan. All rights reserved.</p>
+          <p>Designed for trust, clarity, and creator-first commerce.</p>
         </div>
       </div>
     </footer>

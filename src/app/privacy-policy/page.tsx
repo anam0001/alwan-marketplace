@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import InfoPage from "@/components/site/InfoPage";
+import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -9,13 +9,20 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <InfoPage
+    <PremiumPolicyPage
       eyebrow="Legal"
       title="Privacy Policy"
       summary={`At Alwan, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how Alwan collects, uses, stores, shares, and protects information when you use our website, platform, products, and services (collectively, the "Platform").
 
 By accessing or using Alwan, you agree to the practices described in this Privacy Policy.`}
       updatedLabel="Last Updated: [Insert Date]"
+      readingTime="10 min read"
+      cards={[
+        { title: "Privacy", description: "A transparent overview of the information Alwan handles." },
+        { title: "Security", description: "Measures we use to keep your account and data safer." },
+        { title: "Data protection", description: "How we store, share, and retain information responsibly." },
+        { title: "User rights", description: "What you can ask us to access, correct, or delete." },
+      ]}
       primaryCta={{ label: "Terms & Conditions", href: "/terms-and-conditions" }}
       secondaryCta={{ label: "Contact", href: "/contact" }}
       sections={[

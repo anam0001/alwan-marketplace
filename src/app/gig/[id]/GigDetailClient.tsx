@@ -26,7 +26,7 @@ type GigItem = {
 
 function generatePackages(basePrice: number, category: string): GigPackage[] {
   const basic = Math.max(1500, Math.round(basePrice * 0.7));
-  const standard = Math.max(2500, Math.round(basePrice));
+  const plus = Math.max(2500, Math.round(basePrice));
   const premium = Math.max(3500, Math.round(basePrice * 1.45));
 
   return [
@@ -42,8 +42,8 @@ function generatePackages(basePrice: number, category: string): GigPackage[] {
       ],
     },
     {
-      name: "Standard",
-      price: standard,
+      name: "Plus",
+      price: plus,
       deliveryDays: 3,
       revisions: 3,
       features: [
@@ -58,7 +58,7 @@ function generatePackages(basePrice: number, category: string): GigPackage[] {
       deliveryDays: 2,
       revisions: 5,
       features: [
-        "Everything in Standard",
+        "Everything in Plus",
         "Advanced customization",
         "Fast delivery + premium support",
       ],
@@ -110,7 +110,7 @@ export default function GigDetailClient({ gig }: { gig: GigItem }) {
           <aside className="rounded-3xl border border-primary/15 bg-white p-5 md:p-6 shadow-soft">
             <h3 className="text-lg font-bold text-neutral-900">Set your package</h3>
             <p className="mt-1 text-sm text-neutral-500">
-              Fiverr-style pricing tiers for this gig.
+              Basic, Plus, and Premium pricing tiers for this gig.
             </p>
 
             <div className="mt-4 space-y-2">

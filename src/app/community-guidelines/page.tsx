@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import InfoPage from "@/components/site/InfoPage";
+import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
 
 export const metadata: Metadata = {
   title: "Community Guidelines",
@@ -9,11 +9,18 @@ export const metadata: Metadata = {
 
 export default function CommunityGuidelinesPage() {
   return (
-    <InfoPage
+    <PremiumPolicyPage
       eyebrow="Community"
       title="Community Guidelines"
       summary={`Alwan is a community built to celebrate talent, creativity, entrepreneurship, and opportunity. Our mission is to create a respectful, safe, and empowering environment where creators can showcase their skills, receive recognition for their work, and connect with customers confidently.`}
       updatedLabel="Last Updated: [Insert Date]"
+      readingTime="9 min read"
+      cards={[
+        { title: "Respect", description: "Professional communication and considerate behavior." },
+        { title: "Integrity", description: "Honest profiles, listings, and reviews." },
+        { title: "Creativity", description: "Protect the originality that makes Alwan special." },
+        { title: "Inclusivity", description: "A supportive environment for every creator." },
+      ]}
       primaryCta={{ label: "FAQs", href: "/faqs" }}
       secondaryCta={{ label: "Contact", href: "/contact" }}
       sections={[

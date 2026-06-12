@@ -15,8 +15,10 @@ export default function ServiceGigsPage() {
   return (
     <section className="min-h-screen bg-neutral-50 pt-28 pb-16">
       <div className="container-custom">
-        <h1 className="text-3xl md:text-5xl font-extrabold text-neutral-900">Service Gigs</h1>
-        <p className="mt-3 text-neutral-600">Book practical services with transparent package pricing.</p>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-neutral-900 font-heading">Service Gigs</h1>
+        <p className="mt-3 text-neutral-600 max-w-2xl">
+          Book practical services with transparent Basic, Plus, and Premium package pricing.
+        </p>
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {items.map((item) => (

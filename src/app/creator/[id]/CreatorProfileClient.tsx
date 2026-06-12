@@ -99,7 +99,7 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
                 <p className="mt-3 text-sm font-semibold text-neutral-700">
                   Gig pricing starts from{" "}
                   <span className="text-primary">{formatPrice(creatorStartingPrice)}</span>
-                  <span className="text-neutral-500 font-normal"> • Open any gig to see Basic / Standard / Premium packages.</span>
+                  <span className="text-neutral-500 font-normal"> • Open any gig to see Basic / Plus / Premium packages.</span>
                 </p>
               )}
 

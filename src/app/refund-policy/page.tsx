@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import InfoPage from "@/components/site/InfoPage";
+import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
 
 export const metadata: Metadata = {
   title: "Refund Policy",
@@ -9,11 +9,18 @@ export const metadata: Metadata = {
 
 export default function RefundPolicyPage() {
   return (
-    <InfoPage
+    <PremiumPolicyPage
       eyebrow="Payments"
       title="Refund and Cancellation Policy"
       summary={`At Alwan, we strive to create a fair and transparent marketplace for both creators and customers. This Refund and Cancellation Policy outlines the conditions under which refunds, cancellations, and dispute resolutions may be handled on the Alwan platform.`}
       updatedLabel="Last Updated: [Insert Date]"
+      readingTime="8 min read"
+      cards={[
+        { title: "Refund eligibility", description: "When a review or refund may be considered." },
+        { title: "Non-refundable items", description: "What usually can’t be refunded once work starts." },
+        { title: "Processing time", description: "Refund approvals and timelines can vary." },
+        { title: "Dispute resolution", description: "How to move forward when issues arise." },
+      ]}
       primaryCta={{ label: "Contact", href: "/contact" }}
       secondaryCta={{ label: "Terms & Conditions", href: "/terms-and-conditions" }}
       sections={[

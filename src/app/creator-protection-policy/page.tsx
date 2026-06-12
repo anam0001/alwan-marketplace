@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import InfoPage from "@/components/site/InfoPage";
+import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
 
 export const metadata: Metadata = {
   title: "Creator Protection Policy",
@@ -9,11 +9,18 @@ export const metadata: Metadata = {
 
 export default function CreatorProtectionPolicyPage() {
   return (
-    <InfoPage
+    <PremiumPolicyPage
       eyebrow="Safety"
       title="Creator Protection Policy"
       summary={`At Alwan, we believe every creator deserves recognition, respect, and ownership of their work. This Creator Protection Policy outlines the measures, rights, and standards established to protect creators who showcase products, services, skills, portfolios, and creative work on the Alwan platform.`}
       updatedLabel="Last Updated: [Insert Date]"
+      readingTime="9 min read"
+      cards={[
+        { title: "Ownership protection", description: "Creators keep control of their original work and content." },
+        { title: "Portfolio protection", description: "Your showcase materials are treated as your property." },
+        { title: "Recognition", description: "Attribution and credit matter across the platform." },
+        { title: "Safe marketplace", description: "A zero-tolerance approach to harassment and misuse." },
+      ]}
       primaryCta={{ label: "Report an Issue", href: "/contact" }}
       secondaryCta={{ label: "Terms & Conditions", href: "/terms-and-conditions" }}
       sections={[

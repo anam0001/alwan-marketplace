@@ -6,7 +6,7 @@
 
 import React from "react";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -20,10 +20,17 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
 /* ─── SEO Metadata (customize for production) ─── */
 export const metadata: Metadata = {
   title: {
-    default: "Alwan – Where Her Talent Gets the Credit It Deserves",
+    default: "Alwan – Her Hands. Her Hustle. Her Future.",
     template: "%s | Alwan Marketplace",
   },
   description:
@@ -42,7 +49,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Alwan" }],
   openGraph: {
-    title: "Alwan – Where Her Talent Gets the Credit It Deserves",
+    title: "Alwan – Her Hands. Her Hustle. Her Future.",
     description:
       "Pakistan's premier women-focused talent marketplace for handmade skills and services.",
     type: "website",
@@ -56,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${poppins.variable} ${playfair.variable}`}>
       <body className="min-h-screen flex flex-col">
         {/* ─── Sticky Navbar ─── */}
         <Navbar />

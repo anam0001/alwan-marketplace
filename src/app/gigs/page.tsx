@@ -31,9 +31,9 @@ export default function GigsPage() {
   return (
     <section className="min-h-screen bg-neutral-50 pt-28 pb-16">
       <div className="container-custom">
-        <h1 className="text-3xl md:text-5xl font-extrabold text-neutral-900">Gig Categories</h1>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-neutral-900 font-heading">Gig Categories</h1>
         <p className="mt-3 text-neutral-600 max-w-2xl">
-          Choose a lane to discover specialized gigs and pricing packages.
+          Choose a lane to discover specialized gigs with Basic, Plus, and Premium pricing packages.
         </p>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">

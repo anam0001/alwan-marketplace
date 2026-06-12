@@ -48,7 +48,7 @@ module.exports = {
       },
       /* ─── Typography ─── */
       fontFamily: {
-        heading: ["var(--font-poppins)", "sans-serif"],
+        heading: ["var(--font-playfair)", "serif"],
         body: ["var(--font-poppins)", "sans-serif"],
       },
       /* ─── Border Radius ─── */

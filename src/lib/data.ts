@@ -257,12 +257,18 @@ export const howItWorksSteps = [
   },
   {
     step: 2,
+    title: "Meet Clients & Negotiate Prices",
+    description: "Connect with customers, discuss their needs, and agree on clear pricing that works for both sides.",
+    icon: "🤝",
+  },
+  {
+    step: 3,
     title: "Get Discovered",
     description: "Customers browse and find your services through our curated marketplace. No middlemen, direct connections.",
     icon: "🔍",
   },
   {
-    step: 3,
+    step: 4,
     title: "Earn & Grow",
     description: "Receive payments directly, build your reputation with reviews, and grow your creative business.",
     icon: "💰",

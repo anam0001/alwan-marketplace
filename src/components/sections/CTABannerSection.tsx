@@ -28,14 +28,13 @@ export default function CTABannerSection() {
 
             {/* ─── Content ─── */}
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
-                Ready to Share Your<br />
-                <span className="text-gradient-gold">Talent</span> with the World?
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight font-heading">
+                Her Hands. Her Hustle. Her Future.
               </h2>
               <p className="mt-4 text-white/80 text-lg max-w-xl mx-auto">
                 Join thousands of talented women on Alwan. Create your profile,
-                showcase your skills, and start earning — all from the comfort
-                of your home.
+                showcase your skills, and start earning with confidence — all
+                from the comfort of your home.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button variant="gold" size="lg" href="/join">

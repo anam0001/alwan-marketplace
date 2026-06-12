@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import InfoPage from "@/components/site/InfoPage";
+import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
@@ -9,13 +9,20 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <InfoPage
+    <PremiumPolicyPage
       eyebrow="Legal"
       title="Terms and Conditions"
       summary={`Welcome to Alwan. These Terms and Conditions ("Terms") govern your access to and use of the Alwan website, platform, products, services, and related features (collectively, the "Platform").
 
 By accessing, browsing, registering for, or using Alwan, you acknowledge that you have read, understood, and agreed to be bound by these Terms. If you do not agree to these Terms, please do not use the Platform.`}
       updatedLabel="Last Updated: [Insert Date]"
+  readingTime="12 min read"
+  cards={[
+    { title: "Eligibility", description: "Know who can join, create, and transact on Alwan." },
+    { title: "Ownership", description: "Creator content stays protected and owned by the creator." },
+    { title: "Marketplace conduct", description: "Fair, respectful, and lawful use of the platform." },
+    { title: "Disputes", description: "Clear rules for payments, refunds, and account actions." },
+  ]}
       primaryCta={{ label: "Privacy Policy", href: "/privacy-policy" }}
       secondaryCta={{ label: "Community Guidelines", href: "/community-guidelines" }}
       sections={[

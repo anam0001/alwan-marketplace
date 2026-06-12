@@ -117,18 +117,8 @@ export default function HeroSection() {
           </motion.div>
 
           {/* ─── Staggered word animation tagline ─── */}
-          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
-            {["Where Her ", null, " Gets the ", null, " It Deserves"].map((word, i) => {
-              if (i === 1) return (
-                <motion.span key={i} initial={{ opacity: 0, y: 40, rotateX: -40 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} transition={{ delay: 0.5, duration: 0.7 }} className="inline-block text-gradient-primary">Talent</motion.span>
-              );
-              if (i === 3) return (
-                <motion.span key={i} initial={{ opacity: 0, y: 40, rotateX: -40 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} transition={{ delay: 0.9, duration: 0.7 }} className="inline-block text-gradient-gold">Credit</motion.span>
-              );
-              return (
-                <motion.span key={i} initial={{ opacity: 0, y: 40, rotateX: -40 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} transition={{ delay: 0.3 + i * 0.2, duration: 0.7 }} className="inline-block">{word}</motion.span>
-              );
-            })}
+          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight font-heading">
+            Her Hands. Her Hustle. Her Future.
           </motion.h1>
 
           {/* Subheading */}
@@ -136,11 +126,12 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.3 }}
-            className="mt-6 text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto leading-relaxed"
+            className="mt-6 text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto leading-relaxed font-body"
           >
             Discover extraordinary handmade skills from talented women across
             Pakistan — embroidery, mehndi, crochet, fashion design, and more.
-            No middlemen, just pure talent.
+            No middlemen, just pure talent, professional pricing, and a more
+            personal way to work together.
           </motion.p>
 
           {/* CTA with glow */}
