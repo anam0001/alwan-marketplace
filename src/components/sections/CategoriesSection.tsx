@@ -53,14 +53,17 @@ export default function CategoriesSection() {
                     className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full border border-dashed border-primary/[0.08] group-hover:border-primary/20 transition-colors"
                   />
 
-                  {/* Category Icon with bounce */}
-                  <motion.span
-                    className="text-4xl block mb-3 relative z-10"
-                    whileHover={{ scale: 1.3, rotate: [0, -10, 10, 0] }}
+                  <motion.div
+                    className="relative z-10 mx-auto mb-4 h-20 w-20 overflow-hidden rounded-2xl bg-secondary shadow-soft"
+                    whileHover={{ scale: 1.08 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
-                    {cat.icon}
-                  </motion.span>
+                    <img
+                      src={cat.image}
+                      alt={`${cat.name} category`}
+                      className="h-full w-full object-cover"
+                    />
+                  </motion.div>
 
                   <h3 className="font-semibold text-neutral-800 group-hover:text-primary transition-colors relative z-10">
                     {cat.name}

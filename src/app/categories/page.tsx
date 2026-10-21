@@ -32,8 +32,12 @@ export default function CategoriesPage() {
               className="group rounded-[2rem] border border-neutral-200 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
             >
               <div className="flex items-center justify-between gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary text-3xl">
-                  {category.icon}
+                <div className="h-16 w-16 overflow-hidden rounded-2xl bg-secondary shadow-soft">
+                  <img
+                    src={category.image}
+                    alt={`${category.name} category`}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                   {category.count} listings

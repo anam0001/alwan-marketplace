@@ -8,7 +8,7 @@
  * ────────────────────────────────────────────── */
 
 import type { Metadata } from "next";
-import { getPublicCreatorById, getPublicCreators } from "@/lib/creators";
+import { getPublicCreatorById } from "@/lib/creators";
 import CreatorProfileClient from "./CreatorProfileClient";
 import { notFound } from "next/navigation";
 
@@ -16,13 +16,9 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
-/* ─── Generate static params for all creators ─── */
-export async function generateStaticParams() {
-  const creators = await getPublicCreators();
-  return creators.map((creator) => ({
-    id: String(creator.id),
-  }));
-}
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+export const revalidate = 0;
 
 /* ─── Dynamic metadata ─── */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

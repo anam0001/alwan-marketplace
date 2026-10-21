@@ -6,14 +6,14 @@
 
 /* ─── Categories ─── */
 export const categories = [
-  { id: 1, name: "Embroidery", icon: "🧵", count: 245 },
-  { id: 2, name: "Mehndi", icon: "✋", count: 189 },
-  { id: 3, name: "Crochet", icon: "🧶", count: 134 },
-  { id: 4, name: "Stitching", icon: "👗", count: 312 },
-  { id: 5, name: "Fashion Design", icon: "✂️", count: 98 },
-  { id: 6, name: "Tutoring", icon: "📚", count: 156 },
-  { id: 7, name: "Handmade Crafts", icon: "🎨", count: 278 },
-  { id: 8, name: "Jewelry Making", icon: "💍", count: 87 },
+  { id: 1, name: "Embroidery", image: "/category-images/embroidery.jpg", count: 245 },
+  { id: 2, name: "Mehndi", image: "/category-images/mehndi.jpg", count: 189 },
+  { id: 3, name: "Crochet", image: "/category-images/crochet.jpg", count: 134 },
+  { id: 4, name: "Stitching", image: "/category-images/stitching.jpg", count: 312 },
+  { id: 5, name: "Fashion Design", image: "/category-images/fashion-design.jpg", count: 98 },
+  { id: 6, name: "Tutoring", image: "/category-images/tutoring.jpg", count: 156 },
+  { id: 7, name: "Handmade Crafts", image: "/category-images/handmade-crafts.jpg", count: 278 },
+  { id: 8, name: "Jewelry Making", image: "/category-images/jewelry-making.jpg", count: 87 },
 ];
 
 /* ─── Featured Creators ─── */

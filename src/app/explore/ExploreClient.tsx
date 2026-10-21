@@ -107,7 +107,7 @@ export default function ExploreClient({
                           : "bg-neutral-100 text-neutral-600 hover:bg-primary/10 hover:text-primary"
                       )}
                     >
-                      {cat.icon} {cat.name}
+                      {cat.name}
                     </button>
                   ))}
                 </div>
