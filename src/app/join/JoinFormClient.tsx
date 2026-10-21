@@ -9,12 +9,14 @@
  * ────────────────────────────────────────────── */
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { pakistanCities, skillCategories } from "@/lib/data";
 import Button from "@/components/ui/Button";
 import FadeInOnScroll from "@/components/animations/FadeInOnScroll";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Link from "next/link";
+import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
 
 interface FormData {
   name: string;
@@ -43,6 +45,19 @@ export default function JoinFormClient() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [authReady, setAuthReady] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  useEffect(() => {
+    try {
+      getSupabaseBrowserClient().auth.getSession().then(({ data }) => {
+        setIsSignedIn(Boolean(data.session));
+        setAuthReady(true);
+      }).catch(() => setAuthReady(true));
+    } catch {
+      setAuthReady(true);
+    }
+  });
 
   /* ─── Validation ─── */
   const validate = (): boolean => {
@@ -70,18 +85,24 @@ export default function JoinFormClient() {
     setSubmitError("");
 
     try {
+      const supabase = getSupabaseBrowserClient();
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData.session?.access_token;
+      if (!accessToken) throw new Error("Please create an account or sign in before submitting a creator profile.");
+
+      const body = new FormData();
+      body.append("name", formData.name);
+      body.append("city", formData.city);
+      body.append("skill", formData.skill);
+      body.append("description", formData.description);
+      if (formData.portfolioFiles) {
+        Array.from(formData.portfolioFiles).forEach((file) => body.append("portfolio", file));
+      }
+
       const response = await fetch("/api/creators", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          city: formData.city,
-          skill: formData.skill,
-          description: formData.description,
-          portfolioFiles: formData.portfolioFiles
-            ? Array.from(formData.portfolioFiles).map((file) => file.name)
-            : [],
-        }),
+        headers: { Authorization: `Bearer ${accessToken}` },
+        body,
       });
       const result = await response.json();
       if (!response.ok || !result?.ok) {
@@ -118,6 +139,16 @@ export default function JoinFormClient() {
           />
         </FadeInOnScroll>
 
+        {authReady && !isSignedIn ? (
+          <div className="rounded-3xl bg-white p-8 text-center shadow-card">
+            <h2 className="text-2xl font-bold text-neutral-900">Create an account first</h2>
+            <p className="mt-3 text-neutral-600">Sign up or sign in before publishing your creator profile and portfolio.</p>
+            <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link href="/sign-up" className="rounded-2xl bg-gradient-primary px-6 py-3 font-semibold text-white">Create Account</Link>
+              <Link href="/sign-in" className="rounded-2xl border border-primary/20 px-6 py-3 font-semibold text-primary">Sign In</Link>
+            </div>
+          </div>
+        ) : (
         <AnimatePresence mode="wait">
           {isSubmitted ? (
             /* ─── Success State ─── */
@@ -357,6 +388,7 @@ export default function JoinFormClient() {
             </motion.form>
           )}
         </AnimatePresence>
+        )}
       </div>
     </div>
   );

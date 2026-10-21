@@ -30,3 +30,17 @@ export function getSupabaseServerClient() {
     return null;
   }
 }
+
+export async function getAuthenticatedUser(accessToken: string | null | undefined) {
+  const supabase = getSupabaseServerClient();
+  if (!supabase || !accessToken) return null;
+  const { data } = await supabase.auth.getUser(accessToken);
+  return data.user ?? null;
+}
+
+export function getAdminEmails() {
+  return (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean);
+}

@@ -54,7 +54,9 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
               transition={{ duration: 0.5 }}
               className="w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-4xl md:text-5xl font-bold text-white shadow-glow"
             >
-              {getInitials(creator.name)}
+              {creator.image ? (
+                <img src={creator.image} alt={creator.name} className="h-full w-full rounded-3xl object-cover" />
+              ) : getInitials(creator.name)}
             </motion.div>
 
             {/* ─── Profile Info ─── */}
@@ -140,10 +142,11 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
                 whileHover={{ scale: 1.05 }}
                 className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary cursor-pointer shadow-card hover:shadow-card-hover transition-shadow"
               >
-                {/* Replace with <Image> for real portfolio images */}
-                <div className="w-full h-full flex items-center justify-center text-3xl bg-secondary/50">
-                  {["🧵", "🎨", "✂️", "👗"][idx % 4]}
-                </div>
+                {img ? (
+                  <img src={img} alt={`${creator.name} portfolio work ${idx + 1}`} className="h-full w-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-sm bg-secondary/50 text-neutral-500">Portfolio image</div>
+                )}
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-primary/0 hover:bg-primary/20 transition-colors flex items-center justify-center">
                   <span className="text-white opacity-0 hover:opacity-100 transition-opacity font-medium text-sm">

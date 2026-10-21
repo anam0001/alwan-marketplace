@@ -16,3 +16,15 @@ create table if not exists public.creator_messages (
 -- Helpful indexes
 create index if not exists idx_creator_messages_creator_id on public.creator_messages(creator_id);
 create index if not exists idx_creator_messages_created_at on public.creator_messages(created_at desc);
+
+alter table public.creator_messages enable row level security;
+
+drop policy if exists "Public can submit creator messages" on public.creator_messages;
+create policy "Public can submit creator messages"
+  on public.creator_messages for insert to anon, authenticated
+  with check (true);
+
+drop policy if exists "Admins can read creator messages" on public.creator_messages;
+create policy "Admins can read creator messages"
+  on public.creator_messages for select to authenticated
+  using (auth.jwt() ->> 'email' in (select unnest(string_to_array(current_setting('app.admin_emails', true), ','))));
