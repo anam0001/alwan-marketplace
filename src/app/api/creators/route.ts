@@ -38,6 +38,9 @@ export async function POST(request: Request) {
     if (!supabase || !user) {
       return NextResponse.json({ ok: false, error: "Please sign in before creating a profile." }, { status: 401 });
     }
+    if (!user.email_confirmed_at) {
+      return NextResponse.json({ ok: false, error: "Please verify your email before creating a profile." }, { status: 403 });
+    }
 
     const form = await request.formData();
     const name = String(form.get("name") ?? "").trim();

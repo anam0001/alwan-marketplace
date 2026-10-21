@@ -47,11 +47,13 @@ export default function JoinFormClient() {
   const [submitError, setSubmitError] = useState("");
   const [authReady, setAuthReady] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   useEffect(() => {
     try {
       getSupabaseBrowserClient().auth.getSession().then(({ data }) => {
         setIsSignedIn(Boolean(data.session));
+        setIsEmailVerified(Boolean(data.session?.user.email_confirmed_at));
         setAuthReady(true);
       }).catch(() => setAuthReady(true));
     } catch {
@@ -139,12 +141,18 @@ export default function JoinFormClient() {
           />
         </FadeInOnScroll>
 
-        {authReady && !isSignedIn ? (
+        {authReady && (!isSignedIn || !isEmailVerified) ? (
           <div className="rounded-3xl bg-white p-8 text-center shadow-card">
-            <h2 className="text-2xl font-bold text-neutral-900">Create an account first</h2>
-            <p className="mt-3 text-neutral-600">Sign up or sign in before publishing your creator profile and portfolio.</p>
+            <h2 className="text-2xl font-bold text-neutral-900">
+              {!isSignedIn ? "Create an account first" : "Verify your email first"}
+            </h2>
+            <p className="mt-3 text-neutral-600">
+              {!isSignedIn
+                ? "Sign up or sign in before publishing your creator profile and portfolio."
+                : "Open the verification email from Supabase, confirm your email, then return here to create your profile."}
+            </p>
             <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/sign-up" className="rounded-2xl bg-gradient-primary px-6 py-3 font-semibold text-white">Create Account</Link>
+              {!isSignedIn && <Link href="/sign-up" className="rounded-2xl bg-gradient-primary px-6 py-3 font-semibold text-white">Create Account</Link>}
               <Link href="/sign-in" className="rounded-2xl border border-primary/20 px-6 py-3 font-semibold text-primary">Sign In</Link>
             </div>
           </div>

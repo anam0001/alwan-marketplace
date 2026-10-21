@@ -36,7 +36,7 @@ export default function AuthForm({ mode }: { mode: "signin" | "signup" }) {
 
       if (result.error) throw result.error;
 
-      if (isSignup && !result.data.session) {
+      if (isSignup && !result.data.user?.email_confirmed_at) {
         setMessage("Account created. Check your email to confirm your account, then sign in.");
       } else {
         router.push(isSignup ? "/join" : "/dashboard");
