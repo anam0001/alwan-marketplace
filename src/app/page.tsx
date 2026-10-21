@@ -9,8 +9,13 @@ import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import FeaturedCreatorsSection from "@/components/sections/FeaturedCreatorsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
+import { getPublicCreators } from "@/lib/creators";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const creators = await getPublicCreators();
+
   return (
     <>
       {/* 1. Hero – Main tagline & CTA */}
@@ -23,7 +28,7 @@ export default function HomePage() {
       <HowItWorksSection />
 
       {/* 4. Featured Creators – Top talent showcase */}
-      <FeaturedCreatorsSection />
+      <FeaturedCreatorsSection creators={creators} />
 
       {/* 5. Testimonials – Community reviews */}
       <TestimonialsSection />

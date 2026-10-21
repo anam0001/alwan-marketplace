@@ -17,7 +17,20 @@ export const categories = [
 ];
 
 /* ─── Featured Creators ─── */
-export const featuredCreators = [
+export type CreatorRecord = {
+  id: number;
+  name: string;
+  skill: string;
+  city: string;
+  rating: number;
+  reviews: number;
+  image: string;
+  bio: string;
+  skills: string[];
+  portfolio: string[];
+};
+
+export const featuredCreators: CreatorRecord[] = [
   {
     id: 1,
     name: "Ayesha Khan",

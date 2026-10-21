@@ -42,6 +42,7 @@ export default function JoinFormClient() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   /* ─── Validation ─── */
   const validate = (): boolean => {
@@ -66,10 +67,36 @@ export default function JoinFormClient() {
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    setSubmitError("");
+
+    try {
+      const response = await fetch("/api/creators", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          city: formData.city,
+          skill: formData.skill,
+          description: formData.description,
+          portfolioFiles: formData.portfolioFiles
+            ? Array.from(formData.portfolioFiles).map((file) => file.name)
+            : [],
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result?.ok) {
+        throw new Error(result?.error || "Could not save your creator profile.");
+      }
+      setIsSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Could not save your creator profile. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   /* ─── Input helper ─── */
@@ -308,6 +335,12 @@ export default function JoinFormClient() {
                   "Submit Application"
                 )}
               </Button>
+
+              {submitError && (
+                <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  {submitError}
+                </p>
+              )}
 
               {/* ─── Disclaimer ─── */}
               <p className="text-xs text-neutral-400 text-center">

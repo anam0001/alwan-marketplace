@@ -9,7 +9,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { featuredCreators } from "@/lib/data";
+import type { CreatorRecord } from "@/lib/data";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeInOnScroll from "@/components/animations/FadeInOnScroll";
 import StaggerChildren, {
@@ -20,7 +20,11 @@ import RatingStars from "@/components/ui/RatingStars";
 import Link from "next/link";
 import { getInitials } from "@/lib/utils";
 
-export default function FeaturedCreatorsSection() {
+export default function FeaturedCreatorsSection({
+  creators,
+}: {
+  creators: CreatorRecord[];
+}) {
   return (
     <section className="section-padding bg-white" aria-label="Featured Creators">
       <div className="container-custom">
@@ -32,7 +36,7 @@ export default function FeaturedCreatorsSection() {
         </FadeInOnScroll>
 
         <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {featuredCreators.map((creator) => (
+          {creators.slice(0, 8).map((creator) => (
             <StaggerItem key={creator.id}>
               <Link href={`/creator/${creator.id}`}>
                 <motion.div

@@ -8,7 +8,7 @@
  * ────────────────────────────────────────────── */
 
 import type { Metadata } from "next";
-import { featuredCreators } from "@/lib/data";
+import { getPublicCreatorById, getPublicCreators } from "@/lib/creators";
 import CreatorProfileClient from "./CreatorProfileClient";
 import { notFound } from "next/navigation";
 
@@ -18,7 +18,8 @@ interface Props {
 
 /* ─── Generate static params for all creators ─── */
 export async function generateStaticParams() {
-  return featuredCreators.map((creator) => ({
+  const creators = await getPublicCreators();
+  return creators.map((creator) => ({
     id: String(creator.id),
   }));
 }
@@ -26,7 +27,7 @@ export async function generateStaticParams() {
 /* ─── Dynamic metadata ─── */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const creator = featuredCreators.find((c) => c.id === Number(id));
+  const creator = await getPublicCreatorById(Number(id));
   if (!creator) return { title: "Creator Not Found" };
 
   return {
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CreatorProfilePage({ params }: Props) {
   const { id } = await params;
-  const creator = featuredCreators.find((c) => c.id === Number(id));
+  const creator = await getPublicCreatorById(Number(id));
   if (!creator) notFound();
 
   return <CreatorProfileClient creator={creator} />;
