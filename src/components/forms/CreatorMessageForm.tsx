@@ -97,7 +97,7 @@ export default function CreatorMessageForm({
         onClick={() => setIsOpen((v) => !v)}
         aria-expanded={isOpen}
       >
-        📩 {isOpen ? "Close Form" : `Contact ${creatorName.split(" ")[0]}`}
+        {isOpen ? "Close Form" : `Contact ${creatorName.split(" ")[0]}`}
       </Button>
 
       <AnimatePresence>

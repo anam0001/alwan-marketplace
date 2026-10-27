@@ -53,7 +53,7 @@ export default function FeaturedCreatorsSection({
                     {/* Gold badge for top rated */}
                     {creator.rating >= 4.9 && (
                       <div className="absolute top-3 right-3">
-                        <Badge variant="gold">⭐ Top Rated</Badge>
+                        <Badge variant="gold">Top Rated</Badge>
                       </div>
                     )}
                   </div>
@@ -67,7 +67,7 @@ export default function FeaturedCreatorsSection({
                       {creator.skill}
                     </p>
                     <p className="text-xs text-neutral-400 mt-1">
-                      📍 {creator.city}
+                      {creator.city}
                     </p>
 
                     {/* Rating */}
@@ -92,6 +92,12 @@ export default function FeaturedCreatorsSection({
             </StaggerItem>
           ))}
         </StaggerChildren>
+
+        {creators.length === 0 && (
+          <div className="rounded-3xl border border-dashed border-primary/20 bg-primary/5 p-8 text-center text-neutral-600">
+            Real creator profiles will appear here after approved creators publish their profiles.
+          </div>
+        )}
 
         {/* View all link */}
         <FadeInOnScroll delay={0.3}>

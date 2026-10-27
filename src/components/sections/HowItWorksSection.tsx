@@ -56,9 +56,6 @@ export default function HowItWorksSection() {
                 {/* Journey pulse ring around step circle */}
                 <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border border-primary/30 animate-ping" />
 
-                {/* Icon */}
-                <div className="relative z-10 text-5xl mb-4 mt-4 animate-float-slow">{step.icon}</div>
-
                 {/* Title */}
                 <h3 className="relative z-10 text-xl font-bold text-neutral-900 mb-3">
                   {step.title}

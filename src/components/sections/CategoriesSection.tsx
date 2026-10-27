@@ -29,7 +29,7 @@ export default function CategoriesSection() {
         </FadeInOnScroll>
 
         <StaggerChildren className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {categories.map((cat, idx) => (
+          {categories.map((cat) => (
             <StaggerItem key={cat.id}>
               <Link href={`/explore?category=${encodeURIComponent(cat.name)}`}>
                 <motion.div
@@ -40,40 +40,15 @@ export default function CategoriesSection() {
                     rotateX: -3,
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="group relative p-6 rounded-3xl bg-white/80 backdrop-blur-sm hover:bg-white border border-neutral-100 hover:border-primary/20 text-center transition-all duration-500 cursor-pointer shadow-soft hover:shadow-card-hover perspective-container"
+                  className="group relative min-h-[220px] overflow-hidden rounded-3xl bg-neutral-900 text-left transition-all duration-500 cursor-pointer shadow-soft hover:shadow-card-hover perspective-container"
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  {/* Animated glow on hover */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/0 to-accent-gold/0 group-hover:from-primary/[0.03] group-hover:to-accent-gold/[0.03] transition-all duration-500" />
-
-                  {/* Floating animated ring behind icon */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20 + idx * 3, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full border border-dashed border-primary/[0.08] group-hover:border-primary/20 transition-colors"
-                  />
-
-                  <motion.div
-                    className="relative z-10 mx-auto mb-4 h-20 w-20 overflow-hidden rounded-2xl bg-secondary shadow-soft"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                  >
-                    <img
-                      src={cat.image}
-                      alt={`${cat.name} category`}
-                      className="h-full w-full object-cover"
-                    />
-                  </motion.div>
-
-                  <h3 className="font-semibold text-neutral-800 group-hover:text-primary transition-colors relative z-10">
-                    {cat.name}
-                  </h3>
-                  <p className="text-xs text-neutral-400 mt-1 relative z-10">
-                    {cat.count} services
-                  </p>
-
-                  {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-primary group-hover:w-2/3 transition-all duration-500 rounded-full" />
+                  <img src={cat.image} alt={`${cat.name} category`} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition group-hover:from-primary/80" />
+                  <div className="absolute inset-x-0 bottom-0 z-10 p-5 transition duration-300 group-hover:-translate-y-1">
+                    <h3 className="text-xl font-bold text-white">{cat.name}</h3>
+                    <p className="mt-1 max-h-0 overflow-hidden text-sm text-white/85 opacity-0 transition-all duration-300 group-hover:max-h-10 group-hover:opacity-100">Explore real creators and listings in this category.</p>
+                  </div>
                 </motion.div>
               </Link>
             </StaggerItem>

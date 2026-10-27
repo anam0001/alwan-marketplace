@@ -12,8 +12,8 @@ const funnyMessages = [
   "This page is taking a coffee break ☕",
   "Looks like this page is lost in cyberspace 🚀",
   "Our page took a wrong turn at the internet 🤭",
-  "This corner is still being stitched together 🧵",
-  "Oops! This route is still under creative construction 🎨",
+  "This page is not available yet.",
+  "This route could not be found.",
 ];
 
 export default function NotFound() {

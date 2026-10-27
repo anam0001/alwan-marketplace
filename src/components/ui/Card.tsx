@@ -49,10 +49,13 @@ export default function Card({
     >
       {/* ─── Image ─── */}
       <div className="relative h-52 sm:h-56 bg-secondary overflow-hidden">
-        {/* Replace this div with <Image> when you have real images */}
-        <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary flex items-center justify-center text-4xl">
-          🎨
-        </div>
+        {image ? (
+          <img src={image} alt={title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+        ) : (
+          <div className="w-full h-full bg-secondary flex items-center justify-center text-sm text-neutral-500">
+            Real listing image pending
+          </div>
+        )}
         {/* Category badge */}
         <div className="absolute top-3 left-3">
           <Badge>{category}</Badge>

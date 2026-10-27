@@ -87,7 +87,7 @@ export default function GigDetailClient({ gig }: { gig: GigItem }) {
             <p className="mt-3 text-neutral-600 max-w-3xl">{gig.description}</p>
 
             <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-neutral-600">
-              <span>⭐ {gig.rating} ({gig.reviews} reviews)</span>
+              <span>{gig.rating} rating ({gig.reviews} reviews)</span>
               <span className="w-1 h-1 rounded-full bg-neutral-300" />
               <Link href={`/creator/${gig.creatorId}`} className="text-primary font-semibold hover:underline">
                 by {gig.creator}

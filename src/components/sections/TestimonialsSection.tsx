@@ -71,6 +71,12 @@ export default function TestimonialsSection() {
             </StaggerItem>
           ))}
         </StaggerChildren>
+
+        {testimonials.length === 0 && (
+          <div className="rounded-3xl border border-dashed border-primary/20 bg-white/70 p-8 text-center text-neutral-600">
+            Verified testimonials will appear here after real customer reviews are collected.
+          </div>
+        )}
       </div>
     </section>
   );

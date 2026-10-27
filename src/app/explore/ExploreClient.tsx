@@ -64,15 +64,15 @@ export default function ExploreClient({
           <div className="bg-white rounded-3xl shadow-card p-6 md:p-8 mb-10">
             {/* Search Bar */}
             <div className="relative mb-6">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 text-lg">
-                🔍
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 text-xs font-semibold uppercase tracking-wider">
+                Search
               </span>
               <input
                 type="search"
                 placeholder="Search by name, creator, or keyword..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-neutral-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
+                className="w-full pl-20 pr-4 py-3.5 rounded-2xl border border-neutral-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
                 aria-label="Search marketplace"
               />
             </div>
@@ -169,7 +169,6 @@ export default function ExploreClient({
               animate={{ opacity: 1 }}
               className="text-center py-20"
             >
-              <div className="text-5xl mb-4">🔍</div>
               <h3 className="text-xl font-semibold text-neutral-700">No results found</h3>
               <p className="text-neutral-400 mt-2">
                 Try adjusting your search or filter criteria

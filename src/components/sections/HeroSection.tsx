@@ -9,7 +9,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Button from "@/components/ui/Button";
 import FloatingShapes from "@/components/animations/FloatingShapes";
-import AnimatedCounter from "@/components/animations/AnimatedCounter";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -152,34 +151,6 @@ export default function HeroSection() {
             </Button>
           </motion.div>
 
-          {/* ─── Animated count-up stats ─── */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.7 }}
-            className="mt-20 flex items-center justify-center gap-6 md:gap-12 flex-wrap"
-          >
-            {[
-              { value: 2500, suffix: "+", label: "Creators", icon: "👩‍🎨" },
-              { value: 15000, suffix: "+", label: "Products", icon: "🎨" },
-              { value: 50, suffix: "+", label: "Cities", icon: "🏙️" },
-            ].map((stat) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ y: -5, scale: 1.05 }}
-                className="relative text-center px-6 py-4 rounded-2xl bg-white/60 backdrop-blur-sm border border-white/40 shadow-soft group hover:shadow-card-hover transition-all duration-300"
-              >
-                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary/10 rounded-tr-2xl group-hover:border-primary/30 transition-colors" />
-                <div className="text-lg mb-1">{stat.icon}</div>
-                <AnimatedCounter
-                  target={stat.value}
-                  suffix={stat.suffix}
-                  className="text-2xl md:text-3xl font-bold text-primary"
-                />
-                <div className="text-xs text-neutral-400 mt-1 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </motion.div>
 

@@ -166,7 +166,6 @@ export default function JoinFormClient() {
               animate={{ opacity: 1, scale: 1 }}
               className="bg-white rounded-3xl shadow-card p-10 text-center"
             >
-              <div className="text-6xl mb-4">🎉</div>
               <h2 className="text-2xl font-bold text-neutral-900 mb-2">
                 Welcome to Alwan!
               </h2>
@@ -325,7 +324,6 @@ export default function JoinFormClient() {
                   <span className="text-neutral-400">(optional)</span>
                 </label>
                 <div className="border-2 border-dashed border-neutral-200 rounded-2xl p-8 text-center hover:border-primary/40 transition-colors">
-                  <div className="text-3xl mb-2">📁</div>
                   <input
                     id="portfolio"
                     type="file"

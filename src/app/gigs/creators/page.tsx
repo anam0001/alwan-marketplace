@@ -27,7 +27,7 @@ export default function CreatorGigsPage() {
               </div>
               <h2 className="mt-4 text-lg font-bold text-neutral-900">{creator.name}</h2>
               <p className="text-sm text-primary font-semibold mt-1">{creator.skill}</p>
-              <p className="text-xs text-neutral-500 mt-2">⭐ {creator.rating} • {creator.reviews} reviews</p>
+              <p className="text-xs text-neutral-500 mt-2">{creator.rating} rating • {creator.reviews} reviews</p>
             </Link>
           ))}
         </div>

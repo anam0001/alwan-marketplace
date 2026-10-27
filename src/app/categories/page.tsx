@@ -39,9 +39,6 @@ export default function CategoriesPage() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                  {category.count} listings
-                </span>
               </div>
               <h2 className="mt-5 text-2xl font-bold text-neutral-900">{category.name}</h2>
               <p className="mt-2 text-neutral-600">

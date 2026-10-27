@@ -11,19 +11,19 @@ const pages = [
     title: "Creators Gigs",
     description: "Explore creator-first gigs and open individual profiles.",
     href: "/gigs/creators",
-    emoji: "👩‍🎨",
+    image: "/category-images/handmade-crafts.jpg",
   },
   {
     title: "Art Gigs",
     description: "Creative and artistic offerings such as design, crafts, and visual work.",
     href: "/gigs/art",
-    emoji: "🎨",
+    image: "/category-images/fashion-design.jpg",
   },
   {
     title: "Service Gigs",
     description: "Useful skill-based services for everyday customer needs.",
     href: "/gigs/services",
-    emoji: "🛠️",
+    image: "/category-images/stitching.jpg",
   },
 ];
 
@@ -43,7 +43,7 @@ export default function GigsPage() {
               href={page.href}
               className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-soft hover:shadow-card-hover transition-all duration-300"
             >
-              <div className="text-4xl" aria-hidden="true">{page.emoji}</div>
+              <img src={page.image} alt={page.title} className="h-28 w-full rounded-2xl object-cover" />
               <h2 className="mt-3 text-xl font-bold text-neutral-900">{page.title}</h2>
               <p className="mt-2 text-sm text-neutral-600">{page.description}</p>
             </Link>

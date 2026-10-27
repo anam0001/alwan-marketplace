@@ -71,14 +71,14 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
                   {creator.name}
                 </h1>
                 {creator.rating >= 4.9 && (
-                  <Badge variant="gold">⭐ Top Rated</Badge>
+                  <Badge variant="gold">Top Rated</Badge>
                 )}
               </div>
               <p className="text-lg text-primary font-semibold mt-1">
                 {creator.skill}
               </p>
               <p className="text-sm text-neutral-500 mt-1">
-                📍 {creator.city}, Pakistan
+                {creator.city}, Pakistan
               </p>
 
               {/* Rating summary */}
