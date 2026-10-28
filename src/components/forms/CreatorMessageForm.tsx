@@ -3,6 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/ui/Button";
+import { siteConfig } from "@/lib/siteConfig";
 
 interface CreatorMessageFormProps {
   creatorId: number;
@@ -186,7 +187,7 @@ export default function CreatorMessageForm({
                 <p>{statusText}</p>
                 {status === "error" && (
                   <a
-                    href="https://wa.me/923133457485"
+                    href={siteConfig.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block mt-2 underline"

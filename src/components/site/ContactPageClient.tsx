@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { siteConfig } from "@/lib/siteConfig";
 
 type FormState = {
   name: string;
@@ -57,7 +58,7 @@ export default function ContactPageClient() {
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
-                href="https://wa.me/923133457485"
+                href={siteConfig.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-2xl bg-[#25D366] px-6 py-3 font-semibold text-white shadow-lg transition-transform hover:scale-[1.01]"
@@ -171,8 +172,8 @@ export default function ContactPageClient() {
                 Support details
               </p>
               <div className="mt-5 space-y-4 text-sm text-neutral-700">
-                <p><span className="font-semibold text-neutral-900">Email:</span> [Insert Email Address]</p>
-                <p><span className="font-semibold text-neutral-900">Website:</span> [Insert Website URL]</p>
+                <p><span className="font-semibold text-neutral-900">Email:</span> {siteConfig.email}</p>
+                <p><span className="font-semibold text-neutral-900">Website:</span> {siteConfig.website}</p>
                 <p><span className="font-semibold text-neutral-900">WhatsApp:</span> +92 313 3457485</p>
               </div>
             </div>
@@ -196,7 +197,7 @@ export default function ContactPageClient() {
               exit={{ opacity: 0, y: 12 }}
               className="mt-6 rounded-[2rem] border border-emerald-200 bg-emerald-50 p-5 text-emerald-900 shadow-soft"
             >
-              Thanks — your message has been sent successfully. We’ll get back to you soon.
+              Thanks. Your message has been sent successfully. We&apos;ll get back to you soon.
             </motion.div>
           )}
         </AnimatePresence>

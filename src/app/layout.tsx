@@ -6,17 +6,17 @@
 
 import React from "react";
 import type { Metadata } from "next";
-import { Playfair_Display, Poppins } from "next/font/google";
+import { Lato, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppFloatingButton from "@/components/ui/WhatsAppFloatingButton";
 
 /* ─── Google Font Setup (change font here) ─── */
-const poppins = Poppins({
+const lato = Lato({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-poppins",
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-lato",
   display: "swap",
 });
 
@@ -30,11 +30,11 @@ const playfair = Playfair_Display({
 /* ─── SEO Metadata (customize for production) ─── */
 export const metadata: Metadata = {
   title: {
-    default: "Alwan – Her Hands. Her Hustle. Her Future.",
+    default: "Alwan | Her Hands. Her Hustle. Her Future.",
     template: "%s | Alwan Marketplace",
   },
   description:
-    "Alwan is Pakistan's premier women-focused talent marketplace. Discover handmade crafts, embroidery, mehndi, crochet, stitching, fashion design, tutoring and more — directly from talented women creators.",
+    "Alwan is Pakistan's women-focused talent marketplace. Discover handmade crafts, embroidery, mehndi, crochet, stitching, fashion design, tutoring and more from talented women creators.",
   keywords: [
     "women marketplace",
     "handmade crafts Pakistan",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Alwan" }],
   openGraph: {
-    title: "Alwan – Her Hands. Her Hustle. Her Future.",
+    title: "Alwan | Her Hands. Her Hustle. Her Future.",
     description:
       "Pakistan's premier women-focused talent marketplace for handmade skills and services.",
     type: "website",
@@ -63,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${lato.variable} ${playfair.variable}`}>
       <body className="min-h-screen flex flex-col">
         {/* ─── Sticky Navbar ─── */}
         <Navbar />

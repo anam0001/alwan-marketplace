@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteConfig } from "@/lib/siteConfig";
 
 const footerSections = [
   {
@@ -17,17 +18,17 @@ const footerSections = [
   {
     title: "Support",
     links: [
-      { label: "WhatsApp", href: "https://wa.me/923133457485" },
+      { label: "WhatsApp", href: siteConfig.whatsapp },
       { label: "Help Center", href: "/under-development" },
     ],
   },
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "/under-development", className: "bg-[#1877F2] text-white hover:bg-[#1668d6]" },
-  { label: "Instagram", href: "/under-development", className: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white hover:brightness-105" },
-  { label: "WhatsApp", href: "https://wa.me/923133457485", className: "bg-[#25D366] text-white hover:bg-[#1fb857]" },
-  { label: "LinkedIn", href: "/under-development", className: "bg-[#0A66C2] text-white hover:bg-[#0959a8]" },
+  { label: "Facebook", href: siteConfig.socials.facebook, className: "bg-[#1877F2] text-white hover:bg-[#1668d6]" },
+  { label: "Instagram", href: siteConfig.socials.instagram, className: "bg-gradient-to-r from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white hover:brightness-105" },
+  { label: "WhatsApp", href: siteConfig.whatsapp, className: "bg-[#25D366] text-white hover:bg-[#1fb857]" },
+  { label: "LinkedIn", href: siteConfig.socials.linkedin, className: "bg-[#0A66C2] text-white hover:bg-[#0959a8]" },
 ];
 
 export default function Footer() {

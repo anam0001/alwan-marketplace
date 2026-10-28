@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Refund Policy",
@@ -142,15 +143,15 @@ export default function RefundPolicyPage() {
           title: "19. Contact Us",
           paragraphs: [
             "For refund requests, cancellation inquiries, or dispute-related concerns, please contact Alwan Support:",
-            "Email: [Insert Email Address]",
-            "Website: [Insert Website URL]",
+            `Email: ${siteConfig.email}`,
+            `Website: ${siteConfig.website}`,
           ],
         },
         {
           title: "Fairness Commitment",
           paragraphs: [
             "Alwan is committed to creating a marketplace built on trust, transparency, and respect. We encourage both creators and customers to communicate honestly, act in good faith, and work together toward fair resolutions whenever issues arise.",
-            "Alwan — Her Hands. Her Hustle. Her Future.",
+            "Alwan | Her Hands. Her Hustle. Her Future.",
           ],
         },
       ]}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Explore Talent",
@@ -13,10 +14,10 @@ export default function ExploreTalentPage() {
         <div className="max-w-3xl">
           <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Discovery Collection</p>
           <h1 className="mt-3 text-3xl md:text-5xl font-extrabold text-neutral-900 leading-tight">
-            Explore outstanding talent — identities hidden, creativity revealed.
+            Explore outstanding talent. Identities hidden, creativity revealed.
           </h1>
           <p className="mt-4 text-neutral-600 md:text-lg">
-            Browse Alwan&apos;s curated gallery of anonymous creative pieces. You see the talent itself — not names, profiles, or personal details.
+            Browse Alwan&apos;s curated gallery of anonymous creative pieces. You see the talent itself, not names, profiles, or personal details.
           </p>
         </div>
 
@@ -33,7 +34,7 @@ export default function ExploreTalentPage() {
             Reach out to Alwan and share the talent title. We&apos;ll help you with availability, pricing, and next steps.
           </p>
           <a
-            href="https://wa.me/923133457485"
+            href={siteConfig.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex px-5 py-3 rounded-2xl bg-[#25D366] text-white font-semibold"

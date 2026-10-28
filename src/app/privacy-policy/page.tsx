@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -152,8 +153,8 @@ By accessing or using Alwan, you agree to the practices described in this Privac
           title: "18. Contact Us",
           paragraphs: [
             "If you have questions, concerns, or requests regarding this Privacy Policy, please contact Alwan Support:",
-            "Email: [Insert Email Address]",
-            "Website: [Insert Website URL]",
+            `Email: ${siteConfig.email}`,
+            `Website: ${siteConfig.website}`,
           ],
         },
       ]}

@@ -33,7 +33,7 @@ export default function CTABannerSection() {
               </h2>
               <p className="mt-4 text-white/80 text-lg max-w-xl mx-auto">
                 Join thousands of talented women on Alwan. Create your profile,
-                showcase your skills, and start earning with confidence — all
+                showcase your skills, and start earning with confidence, all
                 from the comfort of your home.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">

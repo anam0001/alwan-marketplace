@@ -12,6 +12,8 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
+import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
+import { siteConfig } from "@/lib/siteConfig";
 
 /* ─── Navigation Links (edit here) ─── */
 const navLinks = [
@@ -26,12 +28,26 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   /* ─── Detect scroll for background change ─── */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    try {
+      const supabase = getSupabaseBrowserClient();
+      supabase.auth.getSession().then(({ data }) => setUserEmail(data.session?.user.email ?? null));
+      const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+        setUserEmail(session?.user.email ?? null);
+      });
+      return () => listener.subscription.unsubscribe();
+    } catch {
+      return undefined;
+    }
   }, []);
 
   return (
@@ -59,7 +75,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2 group">
           <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white shadow-soft p-1 border border-primary/10">
             <Image
-              src="/alwan-logo.svg"
+              src={siteConfig.logo}
               alt="Alwan logo"
               width={28}
               height={28}
@@ -90,8 +106,13 @@ export default function Navbar() {
 
         {/* ─── Desktop CTA ─── */}
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
-          <Button variant="ghost" size="sm" href="/sign-in">
-            Sign In
+          {userEmail && (
+            <span className="hidden xl:inline max-w-36 truncate text-xs text-neutral-500" title={userEmail}>
+              {userEmail}
+            </span>
+          )}
+          <Button variant="ghost" size="sm" href={userEmail ? "/dashboard" : "/sign-in"}>
+            {userEmail ? "Dashboard" : "Sign In"}
           </Button>
           <Button variant="brand" size="sm" href="/join">
             Join Alwan
@@ -142,8 +163,8 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="flex flex-col gap-3 pt-4 border-t border-neutral-100">
-                <Button variant="ghost" size="md" href="/sign-in" fullWidth>
-                  Sign In
+                <Button variant="ghost" size="md" href={userEmail ? "/dashboard" : "/sign-in"} fullWidth>
+                  {userEmail ? "Dashboard" : "Sign In"}
                 </Button>
                 <Button variant="brand" size="md" href="/join" fullWidth>
                   Join Alwan

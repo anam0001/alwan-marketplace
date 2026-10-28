@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Community Guidelines",
@@ -162,7 +163,7 @@ export default function CommunityGuidelinesPage() {
           title: "17. Contact Us",
           paragraphs: [
             "If you have questions, concerns, or wish to report a violation of these Community Guidelines, please contact: Alwan Community Support Team.",
-            "Email: [Insert Email Address] | Website: [Insert Website URL]",
+            `Email: ${siteConfig.email} | Website: ${siteConfig.website}`,
           ],
         },
         {
@@ -170,7 +171,7 @@ export default function CommunityGuidelinesPage() {
           paragraphs: [
             "At Alwan, we believe that talent deserves recognition, creativity deserves respect, and every creator deserves the opportunity to grow in a safe, professional, and supportive environment.",
             "By being part of Alwan, you help build a community founded on trust, respect, fairness, and empowerment.",
-            "Alwan — Her Hands. Her Hustle. Her Future.",
+            "Alwan | Her Hands. Her Hustle. Her Future.",
           ],
         },
       ]}

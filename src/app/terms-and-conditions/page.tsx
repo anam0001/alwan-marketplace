@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
@@ -224,8 +225,8 @@ By accessing, browsing, registering for, or using Alwan, you acknowledge that yo
           paragraphs: [
             "For questions regarding these Terms and Conditions, please contact:",
             "Alwan Support",
-            "Email: [Insert Email Address]",
-            "Website: [Insert Website URL]",
+            `Email: ${siteConfig.email}`,
+            `Website: ${siteConfig.website}`,
           ],
         },
       ]}

@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!creator) return { title: "Creator Not Found" };
 
   return {
-    title: `${creator.name} – ${creator.skill}`,
+    title: `${creator.name} | ${creator.skill}`,
     description: creator.bio,
   };
 }

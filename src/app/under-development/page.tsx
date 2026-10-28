@@ -20,7 +20,7 @@ export default function UnderDevelopmentPage() {
               This page is being thoughtfully built.
             </h1>
             <p className="mt-4 max-w-2xl text-neutral-600 md:text-lg leading-relaxed">
-              We&apos;re polishing this section so it feels as premium as the rest of Alwan. Thanks for your patience — the finished version is on the way.
+              We&apos;re polishing this section so it feels as premium as the rest of Alwan. Thanks for your patience. The finished version is on the way.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">

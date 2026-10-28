@@ -16,7 +16,7 @@
   }
 
   body {
-    @apply bg-white text-neutral-800 font-body;
+    @apply bg-white text-neutral-900 font-body;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -40,6 +40,9 @@
 
 /* ─── Utility Classes ─── */
 @layer utilities {
+  .text-neutral-500 { color: #4b5563; }
+  .text-neutral-400 { color: #6b7280; }
+
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, #D4A017, #F0D060, #B8860B);

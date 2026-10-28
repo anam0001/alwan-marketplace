@@ -16,8 +16,8 @@ import { cn } from "@/lib/utils";
 const priceRanges = [
   { label: "All Prices", min: 0, max: Infinity },
   { label: "Under Rs. 5,000", min: 0, max: 5000 },
-  { label: "Rs. 5,000 – 10,000", min: 5000, max: 10000 },
-  { label: "Rs. 10,000 – 20,000", min: 10000, max: 20000 },
+  { label: "Rs. 5,000 to 10,000", min: 5000, max: 10000 },
+  { label: "Rs. 10,000 to 20,000", min: 10000, max: 20000 },
   { label: "Above Rs. 20,000", min: 20000, max: Infinity },
 ];
 

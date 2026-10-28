@@ -19,7 +19,7 @@ export default function HowItWorksSection() {
   return (
     <section
       id="how-it-works"
-      className="section-padding bg-gradient-to-b from-white to-secondary/30"
+      className="section-padding bg-gradient-to-b from-primary/10 via-primary/5 to-white"
       aria-label="How It Works"
     >
       <div className="container-custom">

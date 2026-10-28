@@ -11,7 +11,7 @@ export default function FaqsPage() {
   return (
     <FaqExplorer
       title="Frequently Asked Questions"
-      summary="A real-time support center for creators, customers, payments, security, and policies — designed to help you find answers fast."
+      summary="A real-time support center for creators, customers, payments, security, and policies, designed to help you find answers fast."
       items={faqItems}
     />
   );

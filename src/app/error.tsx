@@ -20,7 +20,7 @@ export default function GlobalError({
             We hit a small glitch ⚠️
           </h1>
           <p className="mt-3 text-neutral-600">
-            Don&apos;t worry — your data is safe. Please try again, or continue browsing.
+            Don&apos;t worry. Your data is safe. Please try again, or continue browsing.
           </p>
 
           <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">

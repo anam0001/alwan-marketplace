@@ -19,7 +19,7 @@ export default async function HomePage() {
   return (
     <>
       {/* 1. Hero – Main tagline & CTA */}
-      <HeroSection />
+      <HeroSection creatorCount={creators.length} />
 
       {/* 2. Categories – Browse by skill type */}
       <CategoriesSection />

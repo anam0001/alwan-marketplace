@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { siteConfig } from "@/lib/siteConfig";
 
-const phoneE164 = "923133457485";
 const defaultMessage = encodeURIComponent(
   "Hi Alwan! I want details about a creator/gig on your platform."
 );
@@ -8,7 +8,7 @@ const defaultMessage = encodeURIComponent(
 export default function WhatsAppFloatingButton() {
   return (
     <Link
-      href={`https://wa.me/${phoneE164}?text=${defaultMessage}`}
+      href={`${siteConfig.whatsapp}?text=${defaultMessage}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact Alwan on WhatsApp"

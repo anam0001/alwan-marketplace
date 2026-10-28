@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PremiumPolicyPage from "@/components/site/PremiumPolicyPage";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Creator Protection Policy",
@@ -129,15 +130,15 @@ export default function CreatorProtectionPolicyPage() {
           title: "16. Contact Us",
           paragraphs: [
             "For questions, concerns, infringement reports, or creator protection requests, please contact Alwan Creator Protection Team:",
-            "Email: [Insert Email Address]",
-            "Website: [Insert Website URL]",
+            `Email: ${siteConfig.email}`,
+            `Website: ${siteConfig.website}`,
           ],
         },
         {
           title: "Our Promise to Creators",
           paragraphs: [
             "At Alwan, we believe talent deserves recognition, ownership deserves protection, and every creator deserves the opportunity to grow with dignity, confidence, and credit for their work.",
-            "Alwan — Her Hands. Her Hustle. Her Future.",
+            "Alwan | Her Hands. Her Hustle. Her Future.",
           ],
         },
       ]}

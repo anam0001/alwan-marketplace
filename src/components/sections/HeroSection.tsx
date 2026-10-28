@@ -9,8 +9,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Button from "@/components/ui/Button";
 import FloatingShapes from "@/components/animations/FloatingShapes";
+import AnimatedCounter from "@/components/animations/AnimatedCounter";
 
-export default function HeroSection() {
+export default function HeroSection({ creatorCount }: { creatorCount: number }) {
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -128,8 +129,8 @@ export default function HeroSection() {
             className="mt-6 text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto leading-relaxed font-body"
           >
             Discover extraordinary handmade skills from talented women across
-            Pakistan — embroidery, mehndi, crochet, fashion design, and more.
-            No middlemen, just pure talent, professional pricing, and a more
+            Pakistan: embroidery, mehndi, crochet, fashion design, and more.
+            No middlemen. Just pure talent, professional pricing, and a more
             personal way to work together.
           </motion.p>
 
@@ -153,6 +154,16 @@ export default function HeroSection() {
 
         </div>
       </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.7 }}
+            className="mx-auto mt-16 max-w-xs rounded-2xl border border-primary/10 bg-white/75 px-6 py-4 text-center shadow-soft backdrop-blur-sm"
+          >
+            <AnimatedCounter target={creatorCount} suffix="" className="text-3xl font-bold text-primary" />
+            <p className="mt-1 text-sm font-semibold text-neutral-700">Approved creators</p>
+          </motion.div>
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/80 to-transparent" />
