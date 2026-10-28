@@ -1,5 +1,5 @@
 export const siteConfig = {
-  email: "[Insert Email Address]",
+  email: "[anammunir234@gmail.com]",
   website: "https://www.alwan.com",
   whatsapp: "https://wa.me/923133457485",
   logo: "/alwan-logo.svg",
