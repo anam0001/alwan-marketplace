@@ -6,6 +6,7 @@ create table if not exists public.services (
   category text not null,
   description text not null,
   image text not null default '',
+  gallery_files jsonb not null default '[]'::jsonb,
   basic_price numeric(12,2) not null default 0,
   plus_price numeric(12,2) not null default 0,
   premium_price numeric(12,2) not null default 0,
@@ -24,6 +25,7 @@ create table if not exists public.services (
 );
 
 alter table public.services add column if not exists basic_delivery_days integer not null default 7;
+alter table public.services add column if not exists gallery_files jsonb not null default '[]'::jsonb;
 alter table public.services add column if not exists plus_delivery_days integer not null default 5;
 alter table public.services add column if not exists premium_delivery_days integer not null default 3;
 alter table public.services add column if not exists basic_revisions integer not null default 1;
