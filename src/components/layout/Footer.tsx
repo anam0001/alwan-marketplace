@@ -52,6 +52,12 @@ export default function Footer() {
               <p className="mt-4 max-w-md text-sm font-semibold text-white">
                 Her Hands. Her Hustle. Her Future.
               </p>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="mt-3 inline-block text-sm text-neutral-300 transition hover:text-white"
+              >
+                {siteConfig.email}
+              </a>
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link

@@ -52,3 +52,14 @@ drop policy if exists "Public can view portfolios" on storage.objects;
 create policy "Public can view portfolios"
   on storage.objects for select to public
   using (bucket_id = 'creator-portfolios');
+
+drop policy if exists "Creators can update own portfolios" on storage.objects;
+create policy "Creators can update own portfolios"
+  on storage.objects for update to authenticated
+  using (bucket_id = 'creator-portfolios' and (storage.foldername(name))[1] = auth.uid()::text)
+  with check (bucket_id = 'creator-portfolios' and (storage.foldername(name))[1] = auth.uid()::text);
+
+drop policy if exists "Creators can delete own portfolios" on storage.objects;
+create policy "Creators can delete own portfolios"
+  on storage.objects for delete to authenticated
+  using (bucket_id = 'creator-portfolios' and (storage.foldername(name))[1] = auth.uid()::text);

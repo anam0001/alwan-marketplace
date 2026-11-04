@@ -106,11 +106,6 @@ export default function Navbar() {
 
         {/* ─── Desktop CTA ─── */}
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
-          {userEmail && (
-            <span className="hidden xl:inline max-w-36 truncate text-xs text-neutral-500" title={userEmail}>
-              {userEmail}
-            </span>
-          )}
           <Button variant="ghost" size="sm" href={userEmail ? "/dashboard" : "/sign-in"}>
             {userEmail ? "Dashboard" : "Sign In"}
           </Button>
