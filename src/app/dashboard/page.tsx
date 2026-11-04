@@ -53,13 +53,14 @@ export default function DashboardPage() {
 
   async function saveProfile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
     setSaving(true);
     setEditError("");
     try {
       const supabase = getSupabaseBrowserClient();
       const { data } = await supabase.auth.getSession();
       if (!data.session) throw new Error("Please sign in again.");
-      const form = new FormData(event.currentTarget);
+      const form = new FormData(formElement);
       if (files) Array.from(files).forEach((file) => form.append("portfolio", file));
       const response = await fetch("/api/creators", { method: "POST", headers: { Authorization: `Bearer ${data.session.access_token}` }, body: form });
       const result = await response.json();
