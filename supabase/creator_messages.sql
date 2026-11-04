@@ -13,6 +13,13 @@ create table if not exists public.creator_messages (
   created_at timestamptz not null default now()
 );
 
+-- Upgrade older installations that were created before creator_id existed.
+alter table public.creator_messages
+  add column if not exists creator_id bigint;
+
+alter table public.creator_messages
+  alter column creator_id type bigint using creator_id::bigint;
+
 -- Helpful indexes
 create index if not exists idx_creator_messages_creator_id on public.creator_messages(creator_id);
 create index if not exists idx_creator_messages_created_at on public.creator_messages(created_at desc);
