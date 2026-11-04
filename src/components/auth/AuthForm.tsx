@@ -50,6 +50,18 @@ export default function AuthForm({ mode }: { mode: "signin" | "signup" }) {
     }
   }
 
+  async function sendReset() {
+    if (!email.trim()) { setError("Enter your email first."); return; }
+    try {
+      const supabase = getSupabaseBrowserClient();
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}/sign-in` });
+      if (resetError) throw resetError;
+      setMessage("Password reset instructions have been sent to your email.");
+    } catch (resetError) {
+      setError(resetError instanceof Error ? resetError.message : "Could not send reset email.");
+    }
+  }
+
   return (
     <section className="min-h-screen bg-gradient-to-b from-white via-secondary/10 to-white pt-28 pb-16">
       <div className="container-custom">
@@ -102,6 +114,7 @@ export default function AuthForm({ mode }: { mode: "signin" | "signup" }) {
                 className="mt-2 w-full rounded-2xl border border-neutral-200 px-4 py-3 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </label>
+            {!isSignup && <button type="button" onClick={sendReset} className="text-sm font-semibold text-primary hover:underline">Forgot password?</button>}
             <label className="block text-sm font-semibold text-neutral-700">
               Password
               <input
