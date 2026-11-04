@@ -13,6 +13,7 @@ import Card from "@/components/ui/Card";
 import FadeInOnScroll from "@/components/animations/FadeInOnScroll";
 import SectionHeading from "@/components/ui/SectionHeading";
 import CreatorMessageForm from "@/components/forms/CreatorMessageForm";
+import OrderRequestForm from "@/components/forms/OrderRequestForm";
 
 interface Creator {
   id: number;
@@ -116,6 +117,7 @@ export default function CreatorProfileClient({ creator }: { creator: Creator }) 
 
               {/* Contact button */}
               <CreatorMessageForm creatorId={creator.id} creatorName={creator.name} />
+              <OrderRequestForm creatorId={creator.id} creatorName={creator.name} />
             </motion.div>
           </div>
         </div>

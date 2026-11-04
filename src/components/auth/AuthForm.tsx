@@ -11,6 +11,7 @@ export default function AuthForm({ mode }: { mode: "signin" | "signup" }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [accountType, setAccountType] = useState<"creator" | "customer">("customer");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,7 +29,7 @@ export default function AuthForm({ mode }: { mode: "signin" | "signup" }) {
             email: email.trim(),
             password,
             options: {
-              data: { full_name: name.trim() },
+              data: { full_name: name.trim(), account_type: accountType },
               emailRedirectTo: `${window.location.origin}/sign-in?verified=true`,
             },
           })
@@ -77,6 +78,19 @@ export default function AuthForm({ mode }: { mode: "signin" | "signup" }) {
                   className="mt-2 w-full rounded-2xl border border-neutral-200 px-4 py-3 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
               </label>
+            )}
+            {isSignup && (
+              <fieldset>
+                <legend className="text-sm font-semibold text-neutral-700">Account type</legend>
+                <div className="mt-2 grid grid-cols-2 gap-3">
+                  {(["customer", "creator"] as const).map((type) => (
+                    <label key={type} className={`cursor-pointer rounded-2xl border px-4 py-3 text-sm font-semibold capitalize ${accountType === type ? "border-primary bg-primary/5 text-primary" : "border-neutral-200 text-neutral-700"}`}>
+                      <input type="radio" name="accountType" value={type} checked={accountType === type} onChange={() => setAccountType(type)} className="sr-only" />
+                      {type}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
             )}
             <label className="block text-sm font-semibold text-neutral-700">
               Email

@@ -10,6 +10,7 @@
 
 import type { Metadata } from "next";
 import ExploreClient from "./ExploreClient";
+import { getPublicServices } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Explore Marketplace",
@@ -23,11 +24,13 @@ export default async function ExplorePage({
   searchParams: Promise<{ q?: string; category?: string }>;
 }) {
   const params = await searchParams;
+  const services = await getPublicServices();
 
   return (
     <ExploreClient
       initialSearch={params?.q ?? ""}
       initialCategory={params?.category ?? "All"}
+      initialItems={services}
     />
   );
 }

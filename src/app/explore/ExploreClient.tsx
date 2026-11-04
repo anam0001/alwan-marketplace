@@ -6,7 +6,7 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { marketplaceItems, categories } from "@/lib/data";
+import { marketplaceItems, categories, type MarketplaceItem } from "@/lib/data";
 import Card from "@/components/ui/Card";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FadeInOnScroll from "@/components/animations/FadeInOnScroll";
@@ -24,9 +24,11 @@ const priceRanges = [
 export default function ExploreClient({
   initialSearch = "",
   initialCategory = "All",
+  initialItems = [],
 }: {
   initialSearch?: string;
   initialCategory?: string;
+  initialItems?: MarketplaceItem[];
 }) {
   const [search, setSearch] = useState(initialSearch);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
@@ -35,7 +37,8 @@ export default function ExploreClient({
   /* ─── Filtered items ─── */
   const filteredItems = useMemo(() => {
     const priceRange = priceRanges[selectedPriceRange];
-    return marketplaceItems.filter((item) => {
+    const items = initialItems.length > 0 ? initialItems : marketplaceItems;
+    return items.filter((item) => {
       const matchesSearch =
         item.title.toLowerCase().includes(search.toLowerCase()) ||
         item.creator.toLowerCase().includes(search.toLowerCase()) ||
@@ -46,7 +49,7 @@ export default function ExploreClient({
         item.price >= priceRange.min && item.price <= priceRange.max;
       return matchesSearch && matchesCategory && matchesPrice;
     });
-  }, [search, selectedCategory, selectedPriceRange]);
+  }, [initialItems, search, selectedCategory, selectedPriceRange]);
 
   return (
     <div className="min-h-screen bg-neutral-50 pt-28 pb-20">

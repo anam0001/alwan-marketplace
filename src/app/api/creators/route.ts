@@ -53,7 +53,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: false, error: "Please complete all required fields." }, { status: 400 });
     }
 
-    const portfolioUrls = await uploadPortfolioFiles(supabase, user.id, files);
+    const { data: existing } = await supabase
+      .from("creators")
+      .select("portfolio_files, image, status")
+      .eq("user_id", user.id)
+      .maybeSingle();
+    const uploadedUrls = await uploadPortfolioFiles(supabase, user.id, files);
+    const existingUrls = Array.isArray(existing?.portfolio_files)
+      ? existing.portfolio_files.filter((value): value is string => typeof value === "string")
+      : [];
+    const portfolioUrls = [...existingUrls, ...uploadedUrls].slice(-12);
     const { data, error } = await supabase
       .from("creators")
       .upsert(
@@ -64,8 +73,8 @@ export async function POST(request: Request) {
           skill,
           description,
           portfolio_files: portfolioUrls,
-          image: portfolioUrls[0] ?? "",
-          status: "pending",
+          image: uploadedUrls[0] ?? existing?.image ?? portfolioUrls[0] ?? "",
+          status: existing?.status ?? "pending",
         },
         { onConflict: "user_id" }
       )

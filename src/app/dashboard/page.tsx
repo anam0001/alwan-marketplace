@@ -1,15 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
+import ServiceForm from "@/components/forms/ServiceForm";
+import ReviewForm from "@/components/forms/ReviewForm";
 
 export default function DashboardPage() {
   const router = useRouter();
   const [creator, setCreator] = useState<any>(null);
+  const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [editError, setEditError] = useState("");
+  const [files, setFiles] = useState<FileList | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -27,6 +34,9 @@ export default function DashboardPage() {
         const result = await response.json();
         if (!response.ok) throw new Error(result.error || "Could not load dashboard.");
         setCreator(result.creator);
+        const ordersResponse = await fetch("/api/orders", { headers: { Authorization: `Bearer ${sessionData.session.access_token}` }, cache: "no-store" });
+        const ordersResult = await ordersResponse.json();
+        if (ordersResponse.ok) setOrders(ordersResult.orders ?? []);
       } catch (loadError) {
         setError(loadError instanceof Error ? loadError.message : "Could not load dashboard.");
       } finally {
@@ -39,6 +49,35 @@ export default function DashboardPage() {
   async function signOut() {
     await getSupabaseBrowserClient().auth.signOut();
     router.replace("/");
+  }
+
+  async function saveProfile(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSaving(true);
+    setEditError("");
+    try {
+      const supabase = getSupabaseBrowserClient();
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) throw new Error("Please sign in again.");
+      const form = new FormData(event.currentTarget);
+      if (files) Array.from(files).forEach((file) => form.append("portfolio", file));
+      const response = await fetch("/api/creators", { method: "POST", headers: { Authorization: `Bearer ${data.session.access_token}` }, body: form });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Could not update profile.");
+      window.location.reload();
+    } catch (saveError) {
+      setEditError(saveError instanceof Error ? saveError.message : "Could not update profile.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function updateOrder(id: number, status: string) {
+    const supabase = getSupabaseBrowserClient();
+    const { data } = await supabase.auth.getSession();
+    if (!data.session) return;
+    await fetch("/api/orders", { method: "PATCH", headers: { "Content-Type": "application/json", Authorization: `Bearer ${data.session.access_token}` }, body: JSON.stringify({ id, status }) });
+    window.location.reload();
   }
 
   return (
@@ -71,6 +110,21 @@ export default function DashboardPage() {
                   <p className="text-primary">{creator.skill} · {creator.city}</p>
                 </div>
               </div>
+              <button onClick={() => setEditing((value) => !value)} className="mt-5 rounded-2xl border border-primary/20 px-4 py-2 text-sm font-semibold text-primary">
+                {editing ? "Close editor" : "Edit profile"}
+              </button>
+              {editing && (
+                <form onSubmit={saveProfile} className="mt-6 space-y-4 border-t border-neutral-100 pt-6">
+                  <input name="name" defaultValue={creator.name} required minLength={3} className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="Full name" />
+                  <input name="city" defaultValue={creator.city} required className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="City" />
+                  <input name="skill" defaultValue={creator.skill} required className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="Skill" />
+                  <textarea name="description" defaultValue={creator.description} required minLength={20} rows={4} className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="About your work" />
+                  <input type="file" accept="image/*" multiple onChange={(event) => setFiles(event.target.files)} className="w-full rounded-2xl border border-neutral-200 p-3" />
+                  <p className="text-xs text-neutral-500">New images are added to your existing portfolio. The first new image becomes your profile photo.</p>
+                  {editError && <p className="rounded-2xl bg-red-50 p-3 text-sm text-red-700">{editError}</p>}
+                  <button disabled={saving} className="rounded-2xl bg-gradient-primary px-5 py-3 font-semibold text-white disabled:opacity-60">{saving ? "Saving..." : "Save changes"}</button>
+                </form>
+              )}
               <p className="mt-6 leading-relaxed text-neutral-600">{creator.description}</p>
               <div className="mt-6 rounded-2xl bg-secondary/30 p-4 text-sm font-semibold text-neutral-800">Application status: <span className="text-primary capitalize">{creator.status}</span></div>
             </div>
@@ -78,6 +132,19 @@ export default function DashboardPage() {
               <h2 className="text-xl font-bold text-neutral-900">Portfolio</h2>
               {creator.portfolio_files?.length ? <div className="mt-4 grid grid-cols-2 gap-3">{creator.portfolio_files.map((url: string) => <img key={url} src={url} alt="Portfolio work" className="aspect-square w-full rounded-2xl object-cover" />)}</div> : <p className="mt-3 text-neutral-600">No portfolio images uploaded yet.</p>}
             </div>
+          </div>
+        )}
+        {!loading && !error && creator?.status === "approved" && (
+          <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-card md:p-8">
+            <h2 className="text-xl font-bold text-neutral-900">Publish a Fiverr-style service</h2>
+            <p className="mt-2 text-neutral-600">Add Basic, Plus, and Premium pricing so customers can discover and request your service.</p>
+            <ServiceForm />
+          </div>
+        )}
+        {!loading && !error && orders.length > 0 && (
+          <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-card md:p-8">
+            <h2 className="text-xl font-bold text-neutral-900">Order activity</h2>
+            <div className="mt-4 space-y-3">{orders.map((order) => <div key={order.id} className="rounded-2xl border border-neutral-200 p-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><p className="font-semibold text-neutral-900">{order.title}</p><p className="text-sm text-neutral-600">{order.details}</p></div><span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold capitalize text-primary">{order.status.replace("_", " ")}</span></div>{creator && ["requested", "accepted", "in_progress"].includes(order.status) && <div className="mt-3 flex flex-wrap gap-2">{order.status === "requested" && <button onClick={() => updateOrder(order.id, "accepted")} className="rounded-xl bg-primary px-3 py-2 text-sm font-semibold text-white">Accept</button>}{order.status === "accepted" && <button onClick={() => updateOrder(order.id, "in_progress")} className="rounded-xl bg-primary px-3 py-2 text-sm font-semibold text-white">Start work</button>}{order.status === "in_progress" && <button onClick={() => updateOrder(order.id, "completed")} className="rounded-xl bg-emerald-600 px-3 py-2 text-sm font-semibold text-white">Mark completed</button>}</div>}{!creator && order.status === "completed" && <ReviewForm orderId={order.id} />}</div>)}</div>
           </div>
         )}
       </div>
