@@ -46,12 +46,20 @@ export async function POST(request: Request) {
     const name = String(form.get("name") ?? "").trim();
     const city = String(form.get("city") ?? "").trim();
     const skill = String(form.get("skill") ?? "").trim();
+    const phone = String(form.get("phone") ?? "").trim();
+    const cnic = String(form.get("cnic") ?? "").trim();
+    const experience = String(form.get("experience") ?? "").trim();
     const description = String(form.get("description") ?? "").trim();
     const files = form.getAll("portfolio").filter((value): value is File => value instanceof File && value.size > 0);
 
-    if (name.length < 3 || !city || !skill || description.length < 20) {
+    if (name.length < 3 || !city || !skill || phone.length < 7 || cnic.length < 5 || experience.length < 3 || description.length < 20) {
       return NextResponse.json({ ok: false, error: "Please complete all required fields." }, { status: 400 });
     }
+
+    const { data: duplicateCnic } = await supabase.from("creators").select("id, user_id").eq("cnic", cnic).neq("user_id", user.id).maybeSingle();
+    if (duplicateCnic) return NextResponse.json({ ok: false, error: "This CNIC is already linked to another creator profile." }, { status: 409 });
+    const { data: duplicatePhone } = await supabase.from("creators").select("id, user_id").eq("phone", phone).neq("user_id", user.id).maybeSingle();
+    if (duplicatePhone) return NextResponse.json({ ok: false, error: "This phone number is already linked to another creator profile." }, { status: 409 });
 
     const { data: existing } = await supabase
       .from("creators")
@@ -71,6 +79,9 @@ export async function POST(request: Request) {
           name,
           city,
           skill,
+          phone,
+          cnic,
+          experience,
           description,
           portfolio_files: portfolioUrls,
           image: uploadedUrls[0] ?? existing?.image ?? portfolioUrls[0] ?? "",

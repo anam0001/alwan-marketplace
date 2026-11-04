@@ -9,10 +9,29 @@ create table if not exists public.services (
   basic_price numeric(12,2) not null default 0,
   plus_price numeric(12,2) not null default 0,
   premium_price numeric(12,2) not null default 0,
+  basic_delivery_days integer not null default 7,
+  plus_delivery_days integer not null default 5,
+  premium_delivery_days integer not null default 3,
+  basic_revisions integer not null default 1,
+  plus_revisions integer not null default 2,
+  premium_revisions integer not null default 3,
+  basic_details text not null default '',
+  plus_details text not null default '',
+  premium_details text not null default '',
   status text not null default 'published' check (status in ('draft','published','archived')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.services add column if not exists basic_delivery_days integer not null default 7;
+alter table public.services add column if not exists plus_delivery_days integer not null default 5;
+alter table public.services add column if not exists premium_delivery_days integer not null default 3;
+alter table public.services add column if not exists basic_revisions integer not null default 1;
+alter table public.services add column if not exists plus_revisions integer not null default 2;
+alter table public.services add column if not exists premium_revisions integer not null default 3;
+alter table public.services add column if not exists basic_details text not null default '';
+alter table public.services add column if not exists plus_details text not null default '';
+alter table public.services add column if not exists premium_details text not null default '';
 
 create index if not exists idx_services_creator on public.services(creator_id);
 create index if not exists idx_services_status on public.services(status);

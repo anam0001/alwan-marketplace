@@ -7,6 +7,9 @@ create table if not exists public.creators (
   name text not null,
   city text not null,
   skill text not null,
+  phone text not null default '',
+  cnic text not null default '',
+  experience text not null default '',
   description text not null,
   portfolio_files jsonb not null default '[]'::jsonb,
   rating numeric(2,1) not null default 0,
@@ -17,9 +20,13 @@ create table if not exists public.creators (
 );
 
 alter table public.creators add column if not exists user_id uuid references auth.users(id) on delete cascade;
+alter table public.creators add column if not exists phone text not null default '';
+alter table public.creators add column if not exists cnic text not null default '';
+alter table public.creators add column if not exists experience text not null default '';
 alter table public.creators alter column status set default 'pending';
 drop index if exists idx_creators_user_id;
 create unique index idx_creators_user_id on public.creators(user_id);
+create unique index if not exists idx_creators_cnic on public.creators(cnic) where cnic <> '';
 
 create index if not exists idx_creators_status on public.creators(status);
 create index if not exists idx_creators_created_at on public.creators(created_at desc);

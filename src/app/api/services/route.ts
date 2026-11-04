@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   const category = String(payload.category ?? "").trim();
   const description = String(payload.description ?? "").trim();
   if (!title || !category || description.length < 20) return NextResponse.json({ ok: false, error: "Complete the service title, category, and description." }, { status: 400 });
-  const { data, error } = await supabase.from("services").insert({ creator_id: creator.id, title, category, description, image: String(payload.image ?? ""), basic_price: Number(payload.basicPrice ?? 0), plus_price: Number(payload.plusPrice ?? 0), premium_price: Number(payload.premiumPrice ?? 0), status: "published" }).select("id").single();
+  const { data, error } = await supabase.from("services").insert({ creator_id: creator.id, title, category, description, image: String(payload.image ?? ""), basic_price: Number(payload.basicPrice ?? 0), plus_price: Number(payload.plusPrice ?? 0), premium_price: Number(payload.premiumPrice ?? 0), basic_delivery_days: Number(payload.basicDeliveryDays ?? 7), plus_delivery_days: Number(payload.plusDeliveryDays ?? 5), premium_delivery_days: Number(payload.premiumDeliveryDays ?? 3), basic_revisions: Number(payload.basicRevisions ?? 1), plus_revisions: Number(payload.plusRevisions ?? 2), premium_revisions: Number(payload.premiumRevisions ?? 3), basic_details: String(payload.basicDetails ?? ""), plus_details: String(payload.plusDetails ?? ""), premium_details: String(payload.premiumDetails ?? ""), status: "published" }).select("id").single();
   if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true, serviceId: data.id }, { status: 201 });
 }

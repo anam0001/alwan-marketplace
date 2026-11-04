@@ -119,6 +119,9 @@ export default function DashboardPage() {
                   <input name="name" defaultValue={creator.name} required minLength={3} className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="Full name" />
                   <input name="city" defaultValue={creator.city} required className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="City" />
                   <input name="skill" defaultValue={creator.skill} required className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="Skill" />
+                  <input name="phone" defaultValue={creator.phone} required className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="Phone number" />
+                  <input name="cnic" defaultValue={creator.cnic} required className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="CNIC number" />
+                  <input name="experience" defaultValue={creator.experience} required className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="Experience and qualifications" />
                   <textarea name="description" defaultValue={creator.description} required minLength={20} rows={4} className="w-full rounded-2xl border border-neutral-200 px-4 py-3" placeholder="About your work" />
                   <input type="file" accept="image/*" multiple onChange={(event) => setFiles(event.target.files)} className="w-full rounded-2xl border border-neutral-200 p-3" />
                   <p className="text-xs text-neutral-500">New images are added to your existing portfolio. The first new image becomes your profile photo.</p>

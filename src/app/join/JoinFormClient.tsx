@@ -22,6 +22,9 @@ interface FormData {
   name: string;
   city: string;
   skill: string;
+  phone: string;
+  cnic: string;
+  experience: string;
   description: string;
   portfolioFiles: FileList | null;
 }
@@ -38,6 +41,9 @@ export default function JoinFormClient() {
     name: "",
     city: "",
     skill: "",
+    phone: "",
+    cnic: "",
+    experience: "",
     description: "",
     portfolioFiles: null,
   });
@@ -59,7 +65,7 @@ export default function JoinFormClient() {
     } catch {
       setAuthReady(true);
     }
-  });
+  }, []);
 
   /* ─── Validation ─── */
   const validate = (): boolean => {
@@ -69,6 +75,9 @@ export default function JoinFormClient() {
       newErrors.name = "Name must be at least 3 characters";
     if (!formData.city) newErrors.city = "Please select a city";
     if (!formData.skill) newErrors.skill = "Please select a skill category";
+    if (formData.phone.trim().length < 7) newErrors.name = "Phone number is required";
+    if (formData.cnic.trim().length < 5) newErrors.name = "CNIC number is required";
+    if (formData.experience.trim().length < 3) newErrors.description = "Experience is required";
     if (!formData.description.trim())
       newErrors.description = "Please describe your skills";
     if (formData.description.trim().length < 20)
@@ -96,6 +105,9 @@ export default function JoinFormClient() {
       body.append("name", formData.name);
       body.append("city", formData.city);
       body.append("skill", formData.skill);
+      body.append("phone", formData.phone);
+      body.append("cnic", formData.cnic);
+      body.append("experience", formData.experience);
       body.append("description", formData.description);
       if (formData.portfolioFiles) {
         Array.from(formData.portfolioFiles).forEach((file) => body.append("portfolio", file));
@@ -273,6 +285,23 @@ export default function JoinFormClient() {
                     {errors.skill}
                   </p>
                 )}
+              </div>
+
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                <label className="block text-sm font-medium text-neutral-700">
+                  Phone Number <span className="text-red-400">*</span>
+                  <input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required placeholder="03xx-xxxxxxx" className={`${inputClasses("name")} mt-2`} />
+                </label>
+                <label className="block text-sm font-medium text-neutral-700">
+                  CNIC Number <span className="text-red-400">*</span>
+                  <input value={formData.cnic} onChange={(e) => setFormData({ ...formData, cnic: e.target.value })} required placeholder="XXXXX-XXXXXXX-X" className={`${inputClasses("name")} mt-2`} />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="experience" className="block text-sm font-medium text-neutral-700 mb-2">
+                  Experience and qualifications <span className="text-red-400">*</span>
+                </label>
+                <input id="experience" value={formData.experience} onChange={(e) => setFormData({ ...formData, experience: e.target.value })} required placeholder="Years of experience, training, or qualifications" className={inputClasses("description")} />
               </div>
 
               {/* ─── Description ─── */}
