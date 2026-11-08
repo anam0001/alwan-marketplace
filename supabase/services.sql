@@ -35,6 +35,11 @@ alter table public.services add column if not exists basic_details text not null
 alter table public.services add column if not exists plus_details text not null default '';
 alter table public.services add column if not exists premium_details text not null default '';
 
+-- Upgrade older installations that used the "approved" status.
+update public.services set status = 'published' where status = 'approved';
+alter table public.services drop constraint if exists services_status_check;
+alter table public.services add constraint services_status_check check (status in ('draft','published','archived'));
+
 create index if not exists idx_services_creator on public.services(creator_id);
 create index if not exists idx_services_status on public.services(status);
 alter table public.services enable row level security;
