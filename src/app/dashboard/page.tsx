@@ -4,7 +4,6 @@ import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getSupabaseBrowserClient } from "@/lib/supabase-browser";
-import ServiceForm from "@/components/forms/ServiceForm";
 import ReviewForm from "@/components/forms/ReviewForm";
 
 export default function DashboardPage() {
@@ -141,9 +140,9 @@ export default function DashboardPage() {
         )}
         {!loading && !error && accountType === "creator" && creator?.status === "approved" && (
           <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-card md:p-8">
-            <h2 className="text-xl font-bold text-neutral-900">Publish a Fiverr-style service</h2>
-            <p className="mt-2 text-neutral-600">Add Basic, Plus, and Premium pricing so customers can discover and request your service.</p>
-            <ServiceForm />
+            <h2 className="text-xl font-bold text-neutral-900">Create a new gig</h2>
+            <p className="mt-2 text-neutral-600">Build a detailed offer with packages, pricing, delivery times, revisions, and work samples.</p>
+            <Link href="/dashboard/services/new" className="mt-5 inline-flex rounded-2xl bg-gradient-primary px-6 py-3 font-semibold text-white">Create a Gig</Link>
           </div>
         )}
         {!loading && !error && accountType === "customer" && (
