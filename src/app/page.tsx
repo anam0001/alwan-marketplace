@@ -10,11 +10,13 @@ import FeaturedCreatorsSection from "@/components/sections/FeaturedCreatorsSecti
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
 import { getPublicCreators } from "@/lib/creators";
+import { getCategoryStats } from "@/lib/categoryStats";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const creators = await getPublicCreators();
+  const categoryStats = await getCategoryStats();
 
   return (
     <>
@@ -22,7 +24,7 @@ export default async function HomePage() {
       <HeroSection creatorCount={creators.length} />
 
       {/* 2. Categories – Browse by skill type */}
-      <CategoriesSection />
+      <CategoriesSection categories={categoryStats} />
 
       {/* 3. How It Works – 3-step explainer */}
       <HowItWorksSection />

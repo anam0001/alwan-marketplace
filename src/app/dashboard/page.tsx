@@ -17,6 +17,7 @@ export default function DashboardPage() {
   const [saving, setSaving] = useState(false);
   const [editError, setEditError] = useState("");
   const [files, setFiles] = useState<FileList | null>(null);
+  const [accountType, setAccountType] = useState<"creator" | "customer">("customer");
 
   useEffect(() => {
     async function load() {
@@ -27,13 +28,13 @@ export default function DashboardPage() {
           router.replace("/sign-in");
           return;
         }
+        setAccountType(sessionData.session.user.user_metadata?.account_type === "creator" ? "creator" : "customer");
         const response = await fetch("/api/me/creator", {
           headers: { Authorization: `Bearer ${sessionData.session.access_token}` },
           cache: "no-store",
         });
         const result = await response.json();
-        if (!response.ok) throw new Error(result.error || "Could not load dashboard.");
-        setCreator(result.creator);
+        if (response.ok) setCreator(result.creator);
         const ordersResponse = await fetch("/api/orders", { headers: { Authorization: `Bearer ${sessionData.session.access_token}` }, cache: "no-store" });
         const ordersResult = await ordersResponse.json();
         if (ordersResponse.ok) setOrders(ordersResult.orders ?? []);
@@ -86,7 +87,7 @@ export default function DashboardPage() {
       <div className="container-custom max-w-5xl">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] font-semibold text-primary">Creator dashboard</p>
+            <p className="text-xs uppercase tracking-[0.3em] font-semibold text-primary">{accountType === "creator" ? "Creator dashboard" : "Customer dashboard"}</p>
             <h1 className="mt-2 text-3xl md:text-5xl font-extrabold text-neutral-900 font-heading">Your Alwan workspace</h1>
           </div>
           <button onClick={signOut} className="rounded-2xl border border-primary/20 px-5 py-3 font-semibold text-primary">Sign out</button>
@@ -94,14 +95,14 @@ export default function DashboardPage() {
 
         {loading && <p className="mt-8 text-neutral-500">Loading your profile...</p>}
         {error && <p className="mt-8 rounded-2xl bg-red-50 p-4 text-red-700">{error}</p>}
-        {!loading && !error && !creator && (
+        {!loading && !error && accountType === "creator" && !creator && (
           <div className="mt-8 rounded-[2rem] bg-white p-8 shadow-card">
             <h2 className="text-2xl font-bold text-neutral-900">Your creator profile is not submitted yet.</h2>
             <p className="mt-3 text-neutral-600">Complete your profile and upload portfolio work to send it for approval.</p>
             <Link href="/join" className="mt-6 inline-flex rounded-2xl bg-gradient-primary px-6 py-3 font-semibold text-white">Create Profile</Link>
           </div>
         )}
-        {!loading && !error && creator && (
+        {!loading && !error && accountType === "creator" && creator && (
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
             <div className="rounded-[2rem] bg-white p-6 shadow-card md:p-8">
               <div className="flex items-center gap-4">
@@ -138,11 +139,19 @@ export default function DashboardPage() {
             </div>
           </div>
         )}
-        {!loading && !error && creator?.status === "approved" && (
+        {!loading && !error && accountType === "creator" && creator?.status === "approved" && (
           <div className="mt-6 rounded-[2rem] bg-white p-6 shadow-card md:p-8">
             <h2 className="text-xl font-bold text-neutral-900">Publish a Fiverr-style service</h2>
             <p className="mt-2 text-neutral-600">Add Basic, Plus, and Premium pricing so customers can discover and request your service.</p>
             <ServiceForm />
+          </div>
+        )}
+        {!loading && !error && accountType === "customer" && (
+          <div className="mt-8 rounded-[2rem] bg-white p-8 shadow-card">
+            <p className="text-xs uppercase tracking-[0.3em] font-semibold text-primary">Customer account</p>
+            <h2 className="mt-2 text-2xl font-bold text-neutral-900">Discover talent and manage your orders</h2>
+            <p className="mt-3 text-neutral-600">Browse approved services, request work from creators, and review completed orders here.</p>
+            <Link href="/explore" className="mt-6 inline-flex rounded-2xl bg-gradient-primary px-6 py-3 font-semibold text-white">Explore services</Link>
           </div>
         )}
         {!loading && !error && orders.length > 0 && (

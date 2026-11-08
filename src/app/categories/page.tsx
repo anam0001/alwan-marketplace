@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { categories } from "@/lib/data";
+import { getCategoryStats } from "@/lib/categoryStats";
 
 export const metadata: Metadata = {
   title: "Categories",
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
     "Browse Alwan categories like embroidery, mehndi, crochet, stitching, fashion design, tutoring, and handmade crafts.",
 };
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const categories = await getCategoryStats();
   return (
     <section className="min-h-screen bg-gradient-to-b from-white to-secondary/20 pt-28 pb-16">
       <div className="container-custom">
@@ -41,6 +42,7 @@ export default function CategoriesPage() {
                 </div>
               </div>
               <h2 className="mt-5 text-2xl font-bold text-neutral-900">{category.name}</h2>
+                <p className="mt-2 text-sm font-semibold text-primary">{category.creatorCount} creators · {category.serviceCount} services</p>
               <p className="mt-2 text-neutral-600">
                 Browse creators, pricing, and available work in this category.
               </p>

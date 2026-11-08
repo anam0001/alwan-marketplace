@@ -46,10 +46,13 @@ export default function FeaturedCreatorsSection({
                 >
                   {/* ─── Profile Picture Placeholder ─── */}
                   <div className="relative h-48 bg-gradient-to-br from-primary/10 to-secondary flex items-center justify-center">
-                    {/* Replace with <Image> when real photos are available */}
-                    <div className="w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl font-bold text-primary">
-                      {getInitials(creator.name)}
-                    </div>
+                    {creator.image ? (
+                      <img src={creator.image} alt={creator.name} className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl font-bold text-primary">
+                        {getInitials(creator.name)}
+                      </div>
+                    )}
                     {/* Gold badge for top rated */}
                     {creator.rating >= 4.9 && (
                       <div className="absolute top-3 right-3">
